@@ -14,7 +14,7 @@
 
 // Your code starts here.
 // No direct access allowed.
-use Includes\Apis\ApiMethods;
+use Includes\Controllers\ServicesController;
 
 if(!defined('ABSPATH')) exit();
 
@@ -57,7 +57,7 @@ final class RenzoCastillo{
 
 	}
 	public function initialize(){
-		new ApiMethods();
+		ServicesController::init();
 	}
 
 }
