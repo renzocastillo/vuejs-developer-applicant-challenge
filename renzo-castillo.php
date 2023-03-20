@@ -31,11 +31,13 @@ final class RenzoCastillo{
 
 	public function constants(){
 		define('RCRC_VERSION','1.0.0');
-		define('RCRC_PLUGIN_PATH',plugin_dir_path(__FILE__));
-		define('RCRC_PLUGIN_URL',plugins_url(__FILE__));
+		define('RCRC_PLUGIN_PATH',trailingslashit(plugin_dir_path(__FILE__)));
+		define('RCRC_PLUGIN_URL',trailingslashit(plugins_url('',__FILE__)));
 		define('RCRC_API_NAMESPACE','renzo/v1');
 		define('RCRC_API_DATA_TRANSIENT','rcrc_api_data');
 		define('RCRC_SETTINGS_OPTION','test_project_option');
+		define('RCRC_MENU_SLUG','renzo-castillo');
+		define('RCRC_DOMAIN_NAME','renzo-castillo');
 	}
 
 	public function activate(){
