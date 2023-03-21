@@ -1,6 +1,19 @@
 <script setup lang="ts">
+import {onMounted} from "vue";
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+const props = defineProps({
+  adminURL: { type: String, required: true },
+  ajaxURL: { type: String, required: true },
+  apiURL: { type: String, required: true },
+})
+function removeTrailingSlash(str: string) {
+  return str.replace(/\/+$/, '');
+}
+// lifecycle hooks
+onMounted(() => {
+  console.log(props.adminURL)
+})
 </script>
 
 <template>
@@ -10,14 +23,13 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
-      <nav>
+<!--      <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+        <RouterLink to="/settings">About</RouterLink>
+      </nav>-->
     </div>
   </header>
-
-  <RouterView />
+  <router-view></router-view>
 </template>
 
 <style scoped>
@@ -83,3 +95,4 @@ nav a:first-of-type {
   }
 }
 </style>
+

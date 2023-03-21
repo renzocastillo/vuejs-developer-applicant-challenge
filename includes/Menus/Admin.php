@@ -11,20 +11,22 @@ class Admin {
 	public function create_admin_menu(){
 		global $submenu;
 		$capability = 'manage_options';
-		$slug = RCRC_MENU_SLUG;
+		$admin_path = '/wp-admin/admin.php?page=';
+		$page_slug = RCRC_MENU_SLUG;
+		$page_path = $admin_path.$page_slug;
 		$text_domain = RCRC_DOMAIN_NAME;
 		add_menu_page(
 		 __('Renzo Castillo',$text_domain),
 		 __('Renzo Castillo',$text_domain),
 			$capability,
-			$slug,
+			$page_slug,
 			[$this,'menu_page_template'],
 			'',
 		);
 
 		if(current_user_can($capability)){
-			$submenu[$slug][]=[__('Renzo Castillo',$text_domain),$capability,'admin.php?page='.$slug.'#/'];
-			$submenu[$slug][]=[__('Settings',$text_domain),$capability,'admin.php?page='.$slug.'#/settings'];
+			$submenu[$page_slug][]=[__('Renzo Castillo',$text_domain),$capability,$page_path.'#/'];
+			$submenu[$page_slug][]=[__('Settings',$text_domain),$capability,$page_path.'#/settings'];
 		}
 	}
 
@@ -34,7 +36,7 @@ class Admin {
 	}
 
 	public function load_styles(){
-		wp_register_style('vue-app',RCRC_PLUGIN_URL.'dist/assets/index.css',[],rand(),true);
+		wp_register_style('vue-app',RCRC_PLUGIN_URL.'dist/assets/index.css');
 		wp_enqueue_style('vue-app');
 	}
 
@@ -46,7 +48,7 @@ class Admin {
 			'ajaxURL'=>admin_url('admin-ajax.php'),
 			'apiURL'=>home_url('/wp-json'),
 		];
-		wp_localize_script('vue-app','vueAdminLocalizer',
+		wp_localize_script('vue-app','wpData',
 			$args
 		);
 
