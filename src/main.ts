@@ -5,9 +5,16 @@ import App from './App.vue'
 import router from './router'
 
 import './assets/main.scss'
-
+interface WPData{
+    adminURL: string,
+    adminPath: string,
+    adminPages: any,
+    ajaxURL: string,
+    apiURL: string,
+    basePath: string,
+}
 declare global {
-    interface Window { wpData: any; }
+    interface Window { wpData: WPData }
 }
 
 //const app = createApp(App,{adminURL,apiURL,ajaxURL,baseURL})

@@ -45,9 +45,14 @@ class Admin {
 		wp_enqueue_script('vue-app');
 		$args = [
 			'adminURL'=>admin_url('/'),
+			'adminPath'=> '/admin.php',
+			'adminPages'=> [
+				'home'=>'renzo-castillo',
+				'settings'=>'renzo-castillo-settings'
+			],
 			'ajaxURL'=>admin_url('admin-ajax.php'),
 			'apiURL'=>home_url('/wp-json'),
-			'adminPATH'=>'/wp-admin',
+			'basePath'=>'/wp-admin',
 		];
 		wp_localize_script('vue-app','wpData',
 			$args
@@ -62,8 +67,7 @@ class Admin {
 			return $tag;
 		}
 		// change the script tag by adding type="module" and return it.
-		$tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
-		return $tag;
+		return '<script type="module" src="' . esc_url( $src ) . '"></script>';
 	}
 
 	public function menu_page_template(){
