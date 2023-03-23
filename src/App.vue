@@ -2,17 +2,18 @@
 import {onMounted} from "vue";
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-const props = defineProps({
+/*const props = defineProps({
   adminURL: { type: String, required: true },
   ajaxURL: { type: String, required: true },
   apiURL: { type: String, required: true },
-})
+  baseURL: { type: String, required: true },
+})*/
 function removeTrailingSlash(str: string) {
   return str.replace(/\/+$/, '');
 }
 // lifecycle hooks
 onMounted(() => {
-  console.log(props.adminURL)
+  //console.log(props.adminURL)
 })
 </script>
 
@@ -23,10 +24,10 @@ onMounted(() => {
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
-<!--      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/settings">About</RouterLink>
-      </nav>-->
+      <nav>
+        <RouterLink :to="{ name: 'admin', query: { page: 'renzo-castillo' }}">Home</RouterLink>
+        <RouterLink :to="{ name: 'admin', query: { page: 'renzo-castillo-settings' }}">About</RouterLink>
+      </nav>
     </div>
   </header>
   <router-view></router-view>

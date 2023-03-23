@@ -4,30 +4,30 @@ namespace Includes\Menus;
 
 class Admin {
 	public function __construct(){
-		add_action('admin_menu',[$this, 'create_admin_menu' ]);
+		add_action('admin_menu',[$this, 'create_admin_menu' ],11);
 		add_action('admin_enqueue_scripts',[$this,'register_scripts_and_styles']);
 	}
 
 	public function create_admin_menu(){
-		global $submenu;
 		$capability = 'manage_options';
-		$admin_path = '/wp-admin/admin.php?page=';
-		$page_slug = RCRC_MENU_SLUG;
-		$page_path = $admin_path.$page_slug;
+		$menu_slug = RCRC_MENU_SLUG;
 		$text_domain = RCRC_DOMAIN_NAME;
 		add_menu_page(
 		 __('Renzo Castillo',$text_domain),
 		 __('Renzo Castillo',$text_domain),
 			$capability,
-			$page_slug,
+			$menu_slug,
 			[$this,'menu_page_template'],
 			'',
 		);
-
-		if(current_user_can($capability)){
-			$submenu[$page_slug][]=[__('Renzo Castillo',$text_domain),$capability,$page_path.'#/'];
-			$submenu[$page_slug][]=[__('Settings',$text_domain),$capability,$page_path.'#/settings'];
-		}
+		add_submenu_page(
+			$menu_slug,
+			__('Settings',$text_domain),
+			__('Settings',$text_domain),
+			$capability,
+			$menu_slug.'-settings',
+			[$this,'menu_page_template'],
+		);
 	}
 
 	public function register_scripts_and_styles(){
@@ -47,6 +47,7 @@ class Admin {
 			'adminURL'=>admin_url('/'),
 			'ajaxURL'=>admin_url('admin-ajax.php'),
 			'apiURL'=>home_url('/wp-json'),
+			'adminPATH'=>'/wp-admin',
 		];
 		wp_localize_script('vue-app','wpData',
 			$args
