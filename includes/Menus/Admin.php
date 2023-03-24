@@ -11,6 +11,8 @@ class Admin {
 	public function create_admin_menu(){
 		$capability = 'manage_options';
 		$menu_slug = RCRC_MENU_SLUG;
+		$graph = $menu_slug.'-graph';
+		$settings = $menu_slug.'-settings';
 		$text_domain = RCRC_DOMAIN_NAME;
 		add_menu_page(
 		 __('Renzo Castillo',$text_domain),
@@ -22,10 +24,26 @@ class Admin {
 		);
 		add_submenu_page(
 			$menu_slug,
+			__('Table',$text_domain),
+			__('Table',$text_domain),
+			$capability,
+			$menu_slug,
+			[$this,'menu_page_template'],
+		);
+		add_submenu_page(
+			$menu_slug,
+			__('Graph',$text_domain),
+			__('Graph',$text_domain),
+			$capability,
+			$graph,
+			[$this,'menu_page_template'],
+		);
+		add_submenu_page(
+			$menu_slug,
 			__('Settings',$text_domain),
 			__('Settings',$text_domain),
 			$capability,
-			$menu_slug.'-settings',
+			$settings,
 			[$this,'menu_page_template'],
 		);
 	}
