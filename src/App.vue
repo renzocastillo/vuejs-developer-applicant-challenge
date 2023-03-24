@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, type PropType} from "vue";
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-/*const props = defineProps({
-  adminURL: String,
-  ajaxURL: String,
-  apiURL: String,
-  baseURL: String,
-})*/
-function removeTrailingSlash(str: string) {
-  return str.replace(/\/+$/, '');
+interface AdminPages{
+  home:string,
+  settings: string,
 }
+const props = defineProps({
+  adminPages: Object as PropType<AdminPages>,
+})
+/*function removeTrailingSlash(str: string) {
+  return str.replace(/\/+$/, '');
+}*/
 // lifecycle hooks
 onMounted(() => {
   //console.log(props.adminURL)
@@ -24,13 +25,13 @@ onMounted(() => {
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
-      <nav>
-        <RouterLink :to="{ name: 'admin', query: { page: 'renzo-castillo' }}">Home</RouterLink>
-        <RouterLink :to="{ name: 'admin', query: { page: 'renzo-castillo-settings' }}">About</RouterLink>
+      <nav v-if="adminPages!= undefined">
+        <RouterLink :to="{ name: 'admin', query: { page: adminPages.home }}">Home</RouterLink>
+        <RouterLink :to="{ name: 'admin', query: { page: adminPages.settings }}">About</RouterLink>
       </nav>
     </div>
   </header>
-  <RouterView :adminPages="{home:'renzo-castillo',settings:'renzo-castillo-settings'}"/>
+  <RouterView :adminPages="adminPages"/>
 </template>
 
 <style scoped>

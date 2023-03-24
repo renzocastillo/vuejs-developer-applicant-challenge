@@ -13,8 +13,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <main>
-    <AdminHome v-if="page==='renzo-castillo'"/>
-    <AdminSettings v-if="page==='renzo-castillo-settings'"/>
+  <main v-if="adminPages!= undefined">
+    <AdminHome v-if="page=== adminPages.home"/>
+    <AdminSettings v-if="page=== adminPages.settings"/>
   </main>
 </template>

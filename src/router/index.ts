@@ -1,5 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AdminPageView from '../views/AdminPageView.vue'
+interface WPData{
+    adminURL: string,
+    adminPath: string,
+    adminPages: any,
+    ajaxURL: string,
+    apiURL: string,
+    basePath: string,
+}
+declare global {
+    interface Window { wpData: WPData }
+}
 const wpData= window.wpData ||
     {
         'adminURL':'http://localhost:10009/wp-admin/',
@@ -23,4 +34,4 @@ const router = createRouter({
   ],
 })
 
-export default router
+export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath};
