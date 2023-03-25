@@ -11,5 +11,8 @@
     "autoload": {
         "psr-4": {"Includes\\": "includes/"}
     },
-    "require": {}
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7",
+        "wp-coding-standards/wpcs": "^2.3"
+    }
 }
