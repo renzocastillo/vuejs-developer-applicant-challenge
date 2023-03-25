@@ -1,51 +1,87 @@
 <?php
+
 namespace Includes\Controllers;
+
 use WP_REST_Controller;
 use WP_REST_Server;
 
-class ApiRoutesController extends WP_REST_Controller{
+/**
+ *
+ */
+class ApiRoutesController extends WP_REST_Controller {
+	/**
+	 * @var string
+	 */
 	protected $namespace;
+	/**
+	 * @var
+	 */
 	protected $rest_base;
+	/**
+	 * @var array|array[]
+	 */
 	protected array $args;
 
 	/**
 	 */
-	public function __construct( ) {
+	public function __construct() {
 		$this->namespace = RCRC_API_NAMESPACE;
-		$this->args      = [
-			[
-			'methods'             => WP_REST_Server::READABLE,
-			'callback'            =>[$this,'getData'],
-			'permission_callback' =>[$this,'getDataPermissions']
-			],
-			['methods'=> WP_REST_Server::EDITABLE,
-			 'callback'=>[$this,'updateData'],
-			 'permission_callback'=>[$this,'updateDataPermissions']
-			]
-		];
+		$this->args      = array(
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_data' ),
+				'permission_callback' => array( $this, 'get_data_permissions' ),
+			),
+			array(
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'update_data' ),
+				'permission_callback' => array( $this, 'update_data_permissions' ),
+			)
+		);
 		$this->add_methods();
-		add_action('rest_api_init',[$this,'register_routes']);
+		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function register_routes() {
-		register_rest_route($this->namespace,$this->rest_base,$this->args);
-	}
-	public function add_methods(){
+		register_rest_route( $this->namespace, $this->rest_base, $this->args );
 	}
 
-	public function getData(){
+	/**
+	 * @return void
+	 */
+	public function add_methods() {
+	}
+
+	/**
+	 * @return void
+	 */
+	public function get_data() {
 
 	}
 
-	public function getDataPermissions(){
+	/**
+	 * @return void
+	 */
+	public function get_data_permissions() {
 
 	}
 
-	public function updateData($args){
+	/**
+	 * @param $args
+	 *
+	 * @return void
+	 */
+	public function update_data( $args ) {
 
 	}
 
-	public function updateDataPermissions(){
+	/**
+	 * @return void
+	 */
+	public function update_data_permissions() {
 
 	}
 
