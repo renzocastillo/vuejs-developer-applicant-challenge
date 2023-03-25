@@ -3,7 +3,8 @@ import {onMounted, type PropType} from "vue";
 import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/Header.vue'
 interface AdminPages{
-  home:string,
+  table:string,
+  graph: string,
   settings: string,
 }
 const props = defineProps({
@@ -26,8 +27,9 @@ onMounted(() => {
       <Header msg="You did it!" />
 
       <nav v-if="adminPages!= undefined">
-        <RouterLink :to="{ name: 'admin', query: { page: adminPages.home }}">Home</RouterLink>
-        <RouterLink :to="{ name: 'admin', query: { page: adminPages.settings }}">About</RouterLink>
+        <RouterLink :to="{ name: 'admin', query: { page: adminPages.table }}">Table</RouterLink>
+        <RouterLink :to="{ name: 'admin', query: { page: adminPages.graph }}">Graph</RouterLink>
+        <RouterLink :to="{ name: 'admin', query: { page: adminPages.settings }}">Settings</RouterLink>
       </nav>
     </div>
   </header>

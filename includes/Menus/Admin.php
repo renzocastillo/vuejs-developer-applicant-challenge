@@ -83,7 +83,8 @@ class Admin {
 			'adminURL'   => admin_url( '/' ),
 			'adminPath'  => '/admin.php',
 			'adminPages' => array(
-				'home'     => 'renzo-castillo',
+				'table'    => 'renzo-castillo',
+				'graph'    => 'renzo-castillo-graph',
 				'settings' => 'renzo-castillo-settings',
 			),
 			'ajaxURL'    => admin_url( 'admin-ajax.php' ),
