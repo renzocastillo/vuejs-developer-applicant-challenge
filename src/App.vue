@@ -9,6 +9,7 @@ interface AdminPages{
 }
 const props = defineProps({
   adminPages: Object as PropType<AdminPages>,
+  apiURL: String,
 })
 /*function removeTrailingSlash(str: string) {
   return str.replace(/\/+$/, '');
@@ -21,7 +22,7 @@ onMounted(() => {
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
       <Header msg="You did it!" />
@@ -33,7 +34,10 @@ onMounted(() => {
       </nav>
     </div>
   </header>
+  <Suspense>
+
   <RouterView :adminPages="adminPages"/>
+  </Suspense>
 </template>
 
 <style scoped>

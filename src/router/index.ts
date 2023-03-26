@@ -13,15 +13,14 @@ declare global {
 }
 const wpData= window.wpData ||
     {
-        'adminURL':'http://localhost:10009/wp-admin/',
+        'adminURL':'https://vue-plugin.test/wp-admin/',
         'adminPath': '',
         'adminPages': {table:'renzo-castillo',graph:'renzo-castillo-graph',settings:'renzo-castillo-settings'},
-        'ajaxURL':'http://localhost:10009/wp-admin/admin_ajax.php',
-        'apiURL':'http://localhost:10009/wp-json/',
+        'ajaxURL':'https://vue-plugin.test/wp-admin/admin_ajax.php',
+        'apiURL':'https://vue-plugin.test/wp-json/',
         'basePath':'',
     };
 const {adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath} = wpData;
-console.log(adminPath);
 const router = createRouter({
   history: createWebHistory(basePath),
   routes: [
