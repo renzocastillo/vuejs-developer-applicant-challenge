@@ -14,7 +14,7 @@ class RemoteDataRoutesController extends ApiRoutesController {
 	/**
 	 * @var string
 	 */
-	protected $rest_base = '/remote-remoteData';
+	protected $rest_base = '/remote-data';
 
 	/**
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
