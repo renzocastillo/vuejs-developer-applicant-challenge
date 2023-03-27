@@ -9,8 +9,8 @@
     </thead>
     <tbody>
     <tr v-for="item in items" :key='item'>
-      <td v-for="field in fields" :key='field'>
-        {{ field == 'Date' ? toDate(item[field.toLowerCase()]) : item[field.toLowerCase()] }}
+      <td v-for="field in keyFields" :key='field'>
+        {{ field == 'date' ? toDate(item[field]) : item[field] }}
       </td>
     </tr>
     </tbody>
@@ -21,7 +21,7 @@
 </style>
 
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 
 const props = defineProps({
   items: Array,
@@ -30,9 +30,10 @@ const props = defineProps({
   numrows: Number,
 })
 
-/*const keyFields = computed((fields)=>{ return fields.map(
-    (field) => { return field.toLowerCase() }
-)})*/
+const keyFields = props.fields !== undefined ? props.fields.map((field:any) => { return  field.toLowerCase()}) : null;
+
+onMounted(() => {
+});
 
 const maxItems = computed((fields)=>{});
 
