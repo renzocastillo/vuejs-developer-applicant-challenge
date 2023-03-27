@@ -2,16 +2,14 @@
   <table id="tableComponent" class="table table-bordered table-striped">
     <thead>
     <tr>
-      <!-- loop through each value of the fields to get the table header -->
       <th v-for="field in fields" :key='field'>
         {{ field }} <i class="bi bi-sort-alpha-down" aria-label='Sort Icon'></i>
       </th>
     </tr>
     </thead>
     <tbody>
-    <!-- Loop through the list get the each student data -->
     <tr v-for="item in items" :key='item'>
-      <td v-for="field in fields" :key='field'>{{ item[field] }}</td>
+      <td v-for="field in fields" :key='field'>{{ item[field.toLowerCase()] }}</td>
     </tr>
     </tbody>
   </table>
@@ -20,17 +18,15 @@
 <style scoped>
 </style>
 
-<script type="setup" lang="ts">
-export default {
-  name: 'TableComponent',
-  props: {
-    //
-    items: {
-      type: Array,
-    },
-    fields: {
-      type: Array,
-    }
-  },
-}
+<script setup lang="ts">
+import {computed} from "vue";
+
+const props = defineProps({
+  items: Array,
+  fields:Array,
+})
+
+/*const keyFields = computed((fields)=>{ return fields.map(
+    (field) => { return field.toLowerCase() }
+)})*/
 </script>
