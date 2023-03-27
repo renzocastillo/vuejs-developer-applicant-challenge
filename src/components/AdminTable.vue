@@ -14,7 +14,7 @@ import type {AxiosResponse} from "axios";
 import ListComponent from "@/components/ListComponent.vue";
 const axios: any = inject('axios');
 
-const apiRemoteData = apiURL + "renzo/v1/remote-remoteData"
+const apiRemoteData = apiURL + "renzo/v1/remote-data"
 const apiGetSettings = apiURL + "renzo/v1/settings"
 console.log(apiRemoteData);
 
