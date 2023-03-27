@@ -1,6 +1,7 @@
 <template>
-  <h1>This is the table page</h1>
-  <TableComponent :fields='responseData.table.data.headers' :items ="responseData.table.data.rows"/>
+  <h2>Table page</h2>
+  <TableComponent :fields='remoteData.table.data.headers' :items ="remoteData.table.data.rows"/>
+  <ListComponent :items="settingsData.emails"/>
 </template>
 
 
@@ -10,20 +11,14 @@ import TableComponent from "@/components/TableComponent.vue";
 import {apiURL} from "@/router";
 import {inject} from "vue";
 import type {AxiosResponse} from "axios";
-const studentData = [
-  {ID:"01", Name: "Abiola Esther", Course:"Computer Science", Gender:"Female", Age:"17"},
-  {ID:"02", Name: "Robert V. Kratz", Course:"Philosophy", Gender:"Male", Age:'19'},
-  {ID:"03", Name: "Kristen Anderson", Course:"Economics", Gender:"Female", Age:'20'},
-  {ID:"04", Name: "Adam Simon", Course:"Food science", Gender:"Male", Age:'21'},
-  {ID:"05", Name: "Daisy Katherine", Course:"Business studies", Gender:"Female", Age:'22'},
-]
-const fields = [
-  'ID','Name','Course','Gender','Age'
-]
-
-const api = apiURL + "renzo/v1/remote-responseData"
-console.log(api);
+import ListComponent from "@/components/ListComponent.vue";
 const axios: any = inject('axios');
+
+const apiRemoteData = apiURL + "renzo/v1/remote-remoteData"
+const apiGetSettings = apiURL + "renzo/v1/settings"
+console.log(apiRemoteData);
+
+
 type Graph = [
     date: number,
     value: number,
@@ -42,12 +37,23 @@ type Table = {
     }>
   }
 }
-type responseData = {
+type remoteData = {
   graph: Graph,
   table: Table
 }
-const responseData = await axios.get(api).then((response: {
-    data: responseData; responseData: AxiosResponse
+type settingsData ={
+  numrows: string,
+  humandate: boolean,
+  emails: Array<string>,
+}
+
+const remoteData = await axios.get(apiRemoteData).then((response: {
+    data: remoteData; remoteData: AxiosResponse
 }) => { return response.data; });
+
+const settingsData = await axios.get(apiGetSettings).then((response: {
+  data: any; remoteData: AxiosResponse
+}) => { return response.data; });
+
 </script>
 

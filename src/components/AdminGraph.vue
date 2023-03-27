@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <h1>This is the graph page</h1>
+    <h2>Graph page</h2>
   </div>
 </template>
 

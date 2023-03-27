@@ -62,7 +62,7 @@ final class RenzoCastillo {
 				'numrows'   => '5',
 				'humandate' => true,
 				'emails'    => array(
-					'admin_email' => get_bloginfo( 'admin_email' ),
+					get_bloginfo( 'admin_email' ),
 				),
 			);
 			update_option( $settings_option_name, $value );

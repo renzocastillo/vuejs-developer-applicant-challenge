@@ -9,7 +9,9 @@
     </thead>
     <tbody>
     <tr v-for="item in items" :key='item'>
-      <td v-for="field in fields" :key='field'>{{ item[field.toLowerCase()] }}</td>
+      <td v-for="field in fields" :key='field'>
+        {{ field == 'Date' ? toDate(item[field.toLowerCase()]) : item[field.toLowerCase()] }}
+      </td>
     </tr>
     </tbody>
   </table>
@@ -24,9 +26,15 @@ import {computed} from "vue";
 const props = defineProps({
   items: Array,
   fields:Array,
+  humandate: Boolean,
+  numrows: Number,
 })
 
 /*const keyFields = computed((fields)=>{ return fields.map(
     (field) => { return field.toLowerCase() }
 )})*/
+
+const maxItems = computed((fields)=>{});
+
+const toDate = (unixDate:number) => { return new Date(unixDate * 1000)}
 </script>
