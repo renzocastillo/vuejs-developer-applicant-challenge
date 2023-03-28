@@ -17,7 +17,7 @@ const wpData= window.wpData ||
         'adminPath': '',
         'adminPages': {table:'renzo-castillo',graph:'renzo-castillo-graph',settings:'renzo-castillo-settings'},
         'ajaxURL':'https://vue-plugin.test/wp-admin/admin_ajax.php',
-        'apiURL':'https://vue-plugin.test/wp-json/',
+        'apiURL':'https://vue-plugin.test/wp-json',
         'basePath':'',
     };
 const {adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath} = wpData;

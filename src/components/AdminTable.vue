@@ -1,6 +1,11 @@
 <template>
   <h2>Table page</h2>
-  <TableComponent :fields='remoteData.table.data.headers' :items ="remoteData.table.data.rows"/>
+  <TableComponent
+      :fields='remoteData.table.data.headers'
+      :items ="remoteData.table.data.rows"
+      :humandate="settingsData.humandate"
+      :numrows="parseInt(settingsData.numrows)"
+  />
   <ListComponent :items="settingsData.emails"/>
 </template>
 
@@ -8,15 +13,16 @@
 <script setup lang="ts">
 // Importing the table component
 import TableComponent from "@/components/TableComponent.vue";
+import ListComponent from "@/components/ListComponent.vue";
+
 import {apiURL} from "@/router";
 import {inject} from "vue";
 import type {AxiosResponse} from "axios";
-import ListComponent from "@/components/ListComponent.vue";
 const axios: any = inject('axios');
-
-const apiRemoteData = apiURL + "renzo/v1/remote-data"
-const apiGetSettings = apiURL + "renzo/v1/settings"
-console.log(apiRemoteData);
+const apiRemoteData = apiURL + "/renzo/v1/remote-data"
+const apiGetSettings = apiURL + "/renzo/v1/settings"
+console.log('api remote data '+apiRemoteData);
+console.log('api settings '+apiGetSettings);
 
 
 type Graph = [
@@ -48,11 +54,11 @@ type settingsData ={
 }
 
 const remoteData = await axios.get(apiRemoteData).then((response: {
-    data: remoteData; remoteData: AxiosResponse
+    data: remoteData;
 }) => { return response.data; });
 
 const settingsData = await axios.get(apiGetSettings).then((response: {
-  data: any; remoteData: AxiosResponse
+  data: settingsData;
 }) => { return response.data; });
 
 </script>

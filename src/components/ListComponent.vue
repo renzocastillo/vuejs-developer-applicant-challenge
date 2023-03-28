@@ -11,7 +11,8 @@
 
 <script setup lang="ts">
 import ListItemComponent from "@/components/ListItemComponent.vue";
+import type {PropType} from "vue";
 const props = defineProps({
-  items:Array,
+  items:Array as PropType<any>,
 })
 </script>
