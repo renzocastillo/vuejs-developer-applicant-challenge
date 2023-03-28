@@ -15,51 +15,9 @@
 import TableComponent from "@/components/TableComponent.vue";
 import ListComponent from "@/components/ListComponent.vue";
 
-import {apiURL} from "@/router";
-import {inject} from "vue";
-import type {AxiosResponse} from "axios";
-const axios: any = inject('axios');
-const apiRemoteData = apiURL + "/renzo/v1/remote-data"
-const apiGetSettings = apiURL + "/renzo/v1/settings"
-console.log('api remote data '+apiRemoteData);
-console.log('api settings '+apiGetSettings);
-
-
-type Graph = [
-    date: number,
-    value: number,
-]
-
-type Table = {
-  title: string,
-  data : {
-    headers: Array <string>,
-    rows: Array < {
-      id: number,
-      url: string,
-      title: string,
-      pageviews: number,
-      date: number,
-    }>
-  }
-}
-type remoteData = {
-  graph: Graph,
-  table: Table
-}
-type settingsData ={
-  numrows: string,
-  humandate: boolean,
-  emails: Array<string>,
-}
-
-const remoteData = await axios.get(apiRemoteData).then((response: {
-    data: remoteData;
-}) => { return response.data; });
-
-const settingsData = await axios.get(apiGetSettings).then((response: {
-  data: settingsData;
-}) => { return response.data; });
-
+const props = defineProps<{
+  remoteData: any,
+  settingsData: any,
+}>();
 </script>
 
