@@ -8,9 +8,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="item in maxItems(items,numrows)" :key='item.id'>
+    <tr v-for="item in maxItems(items,settings.numrows)" :key='item.id'>
       <td v-for="field in keyFields" :key='field'>
-        {{ field == 'date' && humandate ? toDate(item[field]) : item[field] }}
+        {{ field == 'date' && settings.humandate ? toDate(item[field]) : item[field] }}
       </td>
     </tr>
     </tbody>
@@ -22,6 +22,9 @@
 
 <script setup lang="ts">
 import {computed, onMounted,type PropType} from "vue";
+import {useSettingsStore} from "@/stores/settings";
+
+const settings = useSettingsStore();
 
 type Item = {
   id:number,
@@ -34,25 +37,9 @@ type Item = {
 const props = defineProps<{
   items: Item[],
   fields:string[],
-  humandate: boolean,
-  numrows: number,
 }>()
 
-/*const props = defineProps({
-  items: Array as PropType<Item[]>,
-  fields:Array as PropType<string[]>,
-  humandate: Boolean,
-  numrows: String,
-})*/
-
-
-
-
-
 const keyFields = props.fields !== undefined ? props.fields.map((field:any) => { return  field.toLowerCase()}) : null;
-
-onMounted(() => {
-});
 
 const maxItems = (items :any,max:number)=>{
   return items.slice(0, max)

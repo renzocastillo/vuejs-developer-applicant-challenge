@@ -3,10 +3,8 @@
   <TableComponent
       :fields='remoteData.table.data.headers'
       :items ="remoteData.table.data.rows"
-      :humandate="settingsData.humandate"
-      :numrows="parseInt(settingsData.numrows)"
   />
-  <ListComponent :items="settingsData.emails"/>
+  <ListComponent/>
 </template>
 
 
@@ -17,7 +15,6 @@ import ListComponent from "@/components/ListComponent.vue";
 
 const props = defineProps<{
   remoteData: any,
-  settingsData: any,
 }>();
 </script>
 
