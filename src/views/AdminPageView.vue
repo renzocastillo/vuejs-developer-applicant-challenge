@@ -3,7 +3,7 @@
     <AdminTable v-if="page=== adminPages.table" :remote-data="remoteData" :settings-data="settingsData"/>
     <AdminGraph v-if="page=== adminPages.graph"/>
     <AdminSettings v-if="page=== adminPages.settings" :emails="settingsData.emails" :humandate="settingsData.humandate"
-                   :numrows="parseInt(settingsData.numRows)" />
+                   :numrows="parseInt(settingsData.numrows)" />
   </main>
 </template>
 
