@@ -1,20 +1,19 @@
 <template>
   <h2>Table page</h2>
   <TableComponent
-      :fields='remoteData.table.data.headers'
-      :items ="remoteData.table.data.rows"
+      :fields='table.data.headers'
+      :items ="table.data.rows"
   />
   <ListComponent/>
 </template>
 
 
 <script setup lang="ts">
-// Importing the table component
 import TableComponent from "@/components/TableComponent.vue";
 import ListComponent from "@/components/ListComponent.vue";
 
 const props = defineProps<{
-  remoteData: any,
+  table: any,
 }>();
 </script>
 

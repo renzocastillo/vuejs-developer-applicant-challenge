@@ -1,9 +1,8 @@
 <template>
   <main v-if="adminPages!= undefined">
-    <AdminTable v-if="page=== adminPages.table" :remote-data="remoteData"/>
-    <AdminGraph v-if="page=== adminPages.graph"/>
-    <AdminSettings v-if="page=== adminPages.settings" :emails="settingsData.emails" :humandate="settingsData.humandate"
-                   :numrows="parseInt(settingsData.numrows)" />
+    <AdminTable v-if="page=== adminPages.table" :table="table"/>
+    <AdminGraph v-if="page=== adminPages.graph" :graph="graph"/>
+    <AdminSettings v-if="page=== adminPages.settings"/>
   </main>
 </template>
 
@@ -14,6 +13,7 @@ import AdminTable from '@/components/AdminTable.vue'
 import AdminSettings from "@/components/AdminSettings.vue";
 import AdminGraph from "@/components/AdminGraph.vue";
 import {apiURL} from "@/router";
+import {useSettingsStore} from "@/stores/settings";
 import type {AxiosResponse} from "axios";
 const axios: any = inject('axios');
 const apiRemoteData = apiURL + "/renzo/v1/remote-data"
@@ -56,15 +56,21 @@ type AdminPages = {
 const props = defineProps<{
   page: string,
   adminPages: AdminPages,
-}>()
+}>();
 
-const remoteData = await axios.get(apiRemoteData).then((response: {
-  data: RemoteDataResponse;
-}) => { return response.data; });
+const settings = useSettingsStore();
 
-const settingsData = await axios.get(apiGetSettings).then((response: {
-  data: SettingsDataResponse;
-}) => { return response.data; });
+const {table, graph} = await axios.get(apiRemoteData).then(({data}:{data:RemoteDataResponse})=>{
+  return data;
+});
 
+const {emails, humandate, numrows} = await axios.get(apiGetSettings).then(({data}: { data: SettingsDataResponse }) => {
+  return data;
+});
+
+
+settings.emails = emails;
+settings.humandate = humandate;
+settings.numrows = numrows;
 
 </script>
