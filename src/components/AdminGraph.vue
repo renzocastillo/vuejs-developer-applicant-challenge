@@ -1,9 +1,8 @@
 <template>
   <div class="settings">
     <h2>Graph page</h2>
-    <a href="#" class="btn btn-info float-end" @click="data.callData()">Refresh</a>
+    <a class="btn btn-info float-end" @click="data.callData(true)">Refresh</a>
     <BarChartComponent/>
-    {{data.graph}}
   </div>
 </template>
 
