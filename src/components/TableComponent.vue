@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import {computed, onMounted,type PropType} from "vue";
 import {useSettingsStore} from "@/stores/settings";
+import {toDate} from "@/helper";
 
 const settings = useSettingsStore();
 
@@ -44,6 +45,4 @@ const keyFields = props.fields !== undefined ? props.fields.map((field:any) => {
 const maxItems = (items :any,max:number)=>{
   return items.slice(0, max)
 };
-
-const toDate = (unixDate:number) => { return new Date(unixDate * 1000)}
 </script>

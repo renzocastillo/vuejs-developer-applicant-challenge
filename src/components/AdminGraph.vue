@@ -1,7 +1,7 @@
 <template>
   <div class="settings">
     <h2>Graph page</h2>
-    <BarChartComponent />
+    <BarChartComponent :graph="graph"/>
   </div>
 </template>
 
