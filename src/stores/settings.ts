@@ -1,12 +1,5 @@
 import {defineStore} from "pinia";
-import {reactive, ref} from "vue";
-
-type Settings = {
-    emails: string[],
-    humandate: boolean,
-    numrows: number,
-}
-
+import {ref} from "vue";
 
 export const useSettingsStore = defineStore('setter',()=>{
     const emails = ref(['']);

@@ -58,7 +58,7 @@ class ApiRoutesController extends WP_REST_Controller {
 	/**
 	 * @return void
 	 */
-	public function get_data() {
+	public function get_data( $data = array() ) {
 
 	}
 

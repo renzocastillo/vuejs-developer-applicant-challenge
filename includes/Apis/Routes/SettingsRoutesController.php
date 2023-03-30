@@ -97,7 +97,7 @@ class SettingsRoutesController extends ApiRoutesController {
 	/**
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
-	public function get_data() {
+	public function get_data( $data = array() ) {
 		$settings_option = RCRC_SETTINGS_OPTION;
 		$settings        = get_option( $settings_option );
 

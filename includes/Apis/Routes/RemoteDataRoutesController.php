@@ -19,14 +19,14 @@ class RemoteDataRoutesController extends ApiRoutesController {
 	/**
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
-	public function get_data() {
+	public function get_data( $data = array() ) {
 		$api_data_transient = RCRC_API_DATA_TRANSIENT;
-		// Check if the transient is already set.
-		$cached_data = get_transient( $api_data_transient );
+		$transient_data     = get_transient( $api_data_transient );
+		$update_data        = ! empty( $data ) && rest_sanitize_boolean( $data['update'] );
 
-		if ( $cached_data ) {
+		if ( $transient_data && ! $update_data ) {
 			// If the transient is set, return the cached remoteData.
-			$data = $cached_data;
+			$data = $transient_data;
 		} else {
 			// If the transient is not set, call the external API.
 			$response = wp_remote_get( 'https://miusage.com/v1/challenge/2/static/' );
