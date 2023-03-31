@@ -31,7 +31,6 @@ export const useDataStore = defineStore('data',()=>{
     const graph = ref({});
     const table = ref({});
     const callData = async (update:boolean = false) => {
-        console.log('entra');
         const apiRemoteData = apiURL + "/renzo/v1/remote-data"+ "?update="+update
         console.log(apiRemoteData);
         const {table: tableData, graph: graphData} = await axios.get(apiRemoteData).then(({data}: { data: RemoteDataResponse }) => {

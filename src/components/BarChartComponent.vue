@@ -18,7 +18,6 @@ import {useDataStore} from "@/stores/data";
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const data=useDataStore();
-await data.callData();
 const graph:any = data.graph;
 type Item={
   date:number,

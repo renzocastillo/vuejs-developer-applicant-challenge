@@ -13,7 +13,4 @@ import BarChartComponent from "@/components/BarChartComponent.vue";
 import {useDataStore} from "@/stores/data";
 
 const data=useDataStore();
-const props = defineProps<{
-  graph: any,
-}>();
 </script>

@@ -1,8 +1,8 @@
 <template>
   <h2>Table page</h2>
   <TableComponent
-      :fields='table.data.headers'
-      :items ="table.data.rows"
+      :fields='data.table.data.headers'
+      :items ="data.table.data.rows"
   />
   <ListComponent/>
 </template>
@@ -11,9 +11,8 @@
 <script setup lang="ts">
 import TableComponent from "@/components/TableComponent.vue";
 import ListComponent from "@/components/ListComponent.vue";
+import {useDataStore} from "@/stores/data";
 
-const props = defineProps<{
-  table: any,
-}>();
+const data = useDataStore();
 </script>
 
