@@ -17,15 +17,16 @@ class SettingsRoutesController extends ApiRoutesController {
 	protected $rest_base = '/settings';
 
 	/**
-	 * @param $args
+	 * @param $request
 	 *
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
-	public function update_data( $args ) {
-		$key             = $args['key'];
-		$value           = $args['value'];
+	public function update_data( $request ) {
+		$key             = $request['key'];
+		$value           = $request['value'];
 		$settings_option = RCRC_SETTINGS_OPTION;
 		$settings        = get_option( $settings_option );
+		$result          = false;
 		if ( array_key_exists( $key, $settings ) ) {
 			$validation_result = $this->validateSetting( $key, $value );
 			$value             = $validation_result['value'];
@@ -34,14 +35,8 @@ class SettingsRoutesController extends ApiRoutesController {
 				if ( isset( $value ) ) {
 					$settings[ $key ] = $value;
 					$result           = update_option( $settings_option, $settings );
-				} else {
-					$result = false;
 				}
-			} else {
-				$result = false;
 			}
-		} else {
-			$result = false;
 		}
 
 		return rest_ensure_response( $result );
@@ -58,7 +53,7 @@ class SettingsRoutesController extends ApiRoutesController {
 		$success = true;
 		switch ( $setting_key ) {
 			case 'numrows':
-				if ( ! is_int( $setting_value ) || $setting_value < 1 || $setting_value > 5 ) {
+				if ( !intval( $setting_value ) || $setting_value < 1 || $setting_value > 5 ) {
 					$success = false;
 				}
 				break;

@@ -33,10 +33,10 @@ class ApiRoutesController extends WP_REST_Controller {
 				'permission_callback' => array( $this, 'get_data_permissions' ),
 			),
 			array(
-				'methods'             => WP_REST_Server::EDITABLE,
+				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'update_data' ),
 				'permission_callback' => array( $this, 'update_data_permissions' ),
-			)
+			),
 		);
 		$this->add_methods();
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
@@ -70,11 +70,11 @@ class ApiRoutesController extends WP_REST_Controller {
 	}
 
 	/**
-	 * @param $args
+	 * @param $request
 	 *
 	 * @return void
 	 */
-	public function update_data( $args ) {
+	public function update_data( $request ) {
 
 	}
 
