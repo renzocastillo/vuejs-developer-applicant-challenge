@@ -58,7 +58,7 @@ class SettingsRoutesController extends ApiRoutesController {
 				}
 				break;
 			case 'humandate':
-				$booleans_arr = array( 1, 0, 'true', 'false' );
+				$booleans_arr = array( 1, 0, 'true', 'false',true,false );
 				if ( in_array( $setting_value, $booleans_arr, true ) ) {
 					$setting_value = rest_sanitize_boolean( $setting_value );
 				} else {
