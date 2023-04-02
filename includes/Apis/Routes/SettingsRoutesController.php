@@ -53,12 +53,12 @@ class SettingsRoutesController extends ApiRoutesController {
 		$success = true;
 		switch ( $setting_key ) {
 			case 'numrows':
-				if ( !intval( $setting_value ) || $setting_value < 1 || $setting_value > 5 ) {
+				if ( ! intval( $setting_value ) || $setting_value < 1 || $setting_value > 5 ) {
 					$success = false;
 				}
 				break;
 			case 'humandate':
-				$booleans_arr = array( 1, 0, 'true', 'false',true,false );
+				$booleans_arr = array( 1, 0, 'true', 'false', true, false );
 				if ( in_array( $setting_value, $booleans_arr, true ) ) {
 					$setting_value = rest_sanitize_boolean( $setting_value );
 				} else {
