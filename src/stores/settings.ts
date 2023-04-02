@@ -14,16 +14,6 @@ export const useSettingsStore = defineStore('setter',()=>{
     const humandate = ref(true);
     const numrows = ref(0);
 
-    const addEmailField = () => {
-        emails.value.push('');
-    };
-
-    const removeEmailField = (index:number) => {
-        if(emails.value.length > 1){
-            emails.value.splice(index, 1);
-        }
-    };
-
     const callSettings = async () => {
         const apiGetSettings = apiURL + "/renzo/v1/settings";
         const {
@@ -38,18 +28,33 @@ export const useSettingsStore = defineStore('setter',()=>{
         numrows.value = parseInt(numrowsData);
     }
 
-    const updateSetting = async (key:any,value:any)=>{
-        console.log("key is "+key);
-        console.log("value is "+value);
+    const updateSetting = async (key:string, value:any)=>{
+        console.log("key is");
+        console.log(key);
+        console.log("value is");
+        console.log(value);
         const apiUpdateSettings= apiURL+"/renzo/v1/settings";
         const updated =await axios.post(apiUpdateSettings,{
             key: key,
             value: value
         }).then(({data}: { data: boolean }) => {
-            console.log('response is '+data);
+            if(data){
+                switch(key){
+                    case 'emails':
+                        emails.value=value;
+                        break;
+                    case 'humandate':
+                        humandate.value=value;
+                        break;
+                    case 'numrows':
+                        numrows.value =value;
+                        break;
+                }
+            }
             return data;
         })
         return updated;
     }
-    return { emails,humandate,numrows,addEmailField,removeEmailField,callSettings,updateSetting}
+
+    return { emails,humandate,numrows,callSettings,updateSetting}
 })

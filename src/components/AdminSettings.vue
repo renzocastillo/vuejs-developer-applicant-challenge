@@ -1,28 +1,19 @@
 <template>
   <div class="settings">
     <h2>Settings page</h2>
-    <input type="number" :value="settings.numrows" min="1" max="5" @change="superQueso">
-    <input type="checkbox" v-model="settings.humandate" id="humandate"/>
-    <label for="humandate">{{ settings.humandate }}</label>
-    <div v-for="(email,index) in settings.emails" >
-      <input type="text" v-model="settings.emails[index]" :key="index">
-      <button @click="settings.addEmailField" class="">+ Add</button>
-      <button @click="settings.removeEmailField(index)" class="">- Remove</button>
+    <input type="number" v-model="numrows" min="1" max="5">
+    <input type="checkbox" v-model="humandate" id="humandate"/>
+    <label for="humandate">{{ humandate }}</label>
+    <div v-for="(email,index) in emails" >
+      <input type="text" v-model="emails[index]" :key="index">
+      <button @click="addEmailField" class="">+ Add</button>
+      <button @click="removeEmailField(index)" class="">- Remove</button>
     </div>
-    <p v-if="settingPopup">algo se actualizó pe mascot</p>
+    <p v-if="settingUpdatedPopup">{{settingUpdatedLabel}}</p>
   </div>
 </template>
 
 <style>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
 </style>
 
 <script setup lang="ts">
@@ -35,28 +26,45 @@ interface HTMLInputEvent extends Event {
 }
 
 const settings = useSettingsStore();
-const settingPopup = ref(false);
-const superQueso = (event: HTMLInputEvent)=>{
-  console.log(event.target.value);
-  if(true){
-    event.target.value = String(settings.numrows);
-  }
-  console.log(settings.numrows);
-  console.log('super queso');
-}
+const humandate = ref(settings.humandate);
+const emails = ref(settings.emails);
+const numrows = ref(settings.numrows);
+const settingUpdatedPopup = ref(false);
+const settingUpdatedLabel = ref('');
 
- watch(() => settings.$state.humandate, async (current: boolean, prev: boolean) => {
-   const updated = await settings.updateSetting('humandate', current);
-   if (updated) {
-     poppupShow();
-   }
- })
 
-const poppupShow= () =>{
-  settingPopup.value=true;
+const poppupShow= (updated:boolean) =>{
+  settingUpdatedLabel.value = updated ? 'Setting was updated':'Setting was not updated';
+  settingUpdatedPopup.value=true;
   setTimeout(() => {
-    settingPopup.value = false;
+    settingUpdatedPopup.value = false;
   }, 3000);
 }
+
+const addEmailField = () => {
+  emails.value.push('');
+};
+
+const removeEmailField = (index:number) => {
+  if(emails.value.length > 1){
+    emails.value.splice(index, 1);
+  }
+};
+
+watch(humandate, async (current: boolean, prev: boolean) => {
+  const updated = await settings.updateSetting('humandate', current);
+  poppupShow(updated);
+})
+
+watch(numrows, async (current: number, prev: number) => {
+  const updated = await settings.updateSetting('numrows', current);
+  poppupShow(updated);
+})
+
+watch(()=>[...emails.value], async (current: string[], prev: string[]) => {
+  const updated = await settings.updateSetting('emails', current);
+  poppupShow(updated);
+})
+
 
 </script>
