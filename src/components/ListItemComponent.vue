@@ -1,5 +1,5 @@
 <template>
-<li>
+<li v-if="item.length">
   {{item}}
 </li>
 </template>

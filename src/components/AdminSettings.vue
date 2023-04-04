@@ -1,15 +1,28 @@
 <template>
   <div class="settings">
     <h2>Settings page</h2>
-    <input type="number" v-model="numrows" min="1" max="5">
-    <input type="checkbox" v-model="humandate" id="humandate"/>
-    <label for="humandate">{{ humandate }}</label>
-    <div v-for="(email,index) in emails" >
-      <input type="text" v-model="emails[index]" :key="index">
-      <button @click="addEmailField" class="">+ Add</button>
-      <button @click="removeEmailField(index)" class="">- Remove</button>
+    <div class="numrows-setting">
+      <label for="numrows">Numrows:</label>
+      <input type="number" v-model="numrows" min="1" max="5" id="numrows">
     </div>
-    <p v-if="settingUpdatedPopup">{{settingUpdatedLabel}}</p>
+    <div class="humandate-setting">
+      <label for="humandate">Humandate:</label>
+      <input type="checkbox" v-model="humandate" id="humandate"/>
+
+    </div>
+    <div class="emails-setting">
+      <label>Emails:</label>
+      <div v-for="(email,index) in emails">
+        <input type="text" v-model="emails[index]" @change="updateEmailsSetting" :key="index">
+        <button @click="removeEmailField(index)" class="">- Remove</button>
+      </div>
+      <div v-if="emails.length>=0">
+        <button @click="addEmailField" class="" :disabled="emails.length==5">+ Add</button>
+      </div>
+
+      {{emails}}
+      <p v-if="popupShow">{{ popupLabel }}</p>
+    </div>
   </div>
 </template>
 
@@ -29,41 +42,55 @@ const settings = useSettingsStore();
 const humandate = ref(settings.humandate);
 const emails = ref(settings.emails);
 const numrows = ref(settings.numrows);
-const settingUpdatedPopup = ref(false);
-const settingUpdatedLabel = ref('');
+const popupShow = ref(false);
+const popupLabel = ref('');
 
 
-const poppupShow= (updated:boolean) =>{
-  settingUpdatedLabel.value = updated ? 'Setting was updated':'Setting was not updated';
-  settingUpdatedPopup.value=true;
+const poppupShow = (label: string) => {
+  popupLabel.value = label;
+  popupShow.value = true;
   setTimeout(() => {
-    settingUpdatedPopup.value = false;
+    popupShow.value = false;
   }, 3000);
 }
 
 const addEmailField = () => {
-  emails.value.push('');
-};
-
-const removeEmailField = (index:number) => {
-  if(emails.value.length > 1){
-    emails.value.splice(index, 1);
+  if(emails.value.length < 5) {
+    emails.value.push('');
   }
 };
 
+const removeEmailField = async (index: number) => {
+  emails.value.splice(index, 1);
+  console.log(emails.value);
+  updateEmailsSetting();
+};
+
+const updateEmailsSetting = async () => {
+  const updated = await settings.updateSetting('emails', emails.value);
+  if(updated){
+    poppupShow('Emails were updated');
+  }else{
+    poppupShow('Emails were not updated');
+  }
+
+}
 watch(humandate, async (current: boolean, prev: boolean) => {
   const updated = await settings.updateSetting('humandate', current);
-  poppupShow(updated);
+  if(updated){
+    poppupShow('Humandate was updated');
+  }else{
+    poppupShow('Humandate was not updated');
+  }
 })
 
 watch(numrows, async (current: number, prev: number) => {
   const updated = await settings.updateSetting('numrows', current);
-  poppupShow(updated);
-})
-
-watch(()=>[...emails.value], async (current: string[], prev: string[]) => {
-  const updated = await settings.updateSetting('emails', current);
-  poppupShow(updated);
+  if(updated){
+    poppupShow('Numrows was updated');
+  }else{
+    poppupShow('Numrows was not updated');
+  }
 })
 
 
