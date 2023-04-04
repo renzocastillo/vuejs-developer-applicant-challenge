@@ -28,7 +28,7 @@ const router = createRouter({
         path: adminPath,
         name: 'admin',
         component:AdminPageView,
-        props: route => ({ page: route.query.page })
+        props: route => ({ page: route.query.page || '' })
     }
   ],
 })

@@ -1,5 +1,5 @@
 <template>
-  <main v-if="adminPages!= undefined">
+  <main v-if="page!='' && adminPages!= undefined">
     <AdminTable v-if="page=== adminPages.table"/>
     <AdminGraph v-if="page=== adminPages.graph"/>
     <AdminSettings v-if="page=== adminPages.settings"/>

@@ -14,9 +14,4 @@ import ListItemComponent from "@/components/ListItemComponent.vue";
 import {useSettingsStore} from "@/stores/settings";
 
 const settings = useSettingsStore();
-
-import type {PropType} from "vue";
-const props = defineProps({
-  items:Array as PropType<any>,
-})
 </script>

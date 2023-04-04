@@ -12,7 +12,7 @@
       </nav>
     </div>
   </header>
-  <Suspense>
+  <Suspense v-if="adminPages!= undefined">
   <RouterView :adminPages="adminPages"/>
   </Suspense>
 </template>
@@ -29,15 +29,10 @@ interface AdminPages{
   graph: string,
   settings: string,
 }
-const props = defineProps({
-  adminPages: Object as PropType<AdminPages>,
-  apiURL: String,
-})
-/*function removeTrailingSlash(str: string) {
-  return str.replace(/\/+$/, '');
-}*/
-// lifecycle hooks
-onMounted(() => {
-  //console.log(props.adminURL)
-})
+
+const props = defineProps<{
+  adminPages: AdminPages,
+  apiURL: string,
+}>()
+
 </script>

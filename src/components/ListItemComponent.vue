@@ -10,7 +10,7 @@
 </style>
 
 <script setup lang="ts">
-const props = defineProps({
-  item: String,
-})
+const props = defineProps<{
+  item:string,
+}>();
 </script>

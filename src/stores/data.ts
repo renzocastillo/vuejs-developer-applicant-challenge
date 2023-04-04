@@ -28,8 +28,8 @@ type RemoteDataResponse = {
 }
 
 export const useDataStore = defineStore('data',()=>{
-    const graph = ref({});
-    const table = ref({});
+    const graph = ref(<Graph>{});
+    const table = ref(<Table>{});
     const callData = async (update:boolean = false) => {
         const apiRemoteData = apiURL + "/renzo/v1/remote-data"+ "?update="+update
         console.log(apiRemoteData);
