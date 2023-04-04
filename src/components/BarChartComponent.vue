@@ -24,7 +24,12 @@ type Item={
   value:number,
 }
 const chartOptions = {
-  responsive: true
+  responsive: true,
+  plugins: {
+    legend: {
+      onClick: null
+    }
+  }
 }
 
 </script>

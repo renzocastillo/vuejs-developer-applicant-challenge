@@ -19,8 +19,6 @@
       <div v-if="emails.length>=0">
         <button @click="addEmailField" class="" :disabled="emails.length==5">+ Add</button>
       </div>
-
-      {{emails}}
       <p v-if="popupShow">{{ popupLabel }}</p>
     </div>
   </div>

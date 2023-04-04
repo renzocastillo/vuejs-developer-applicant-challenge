@@ -4,10 +4,12 @@ import {apiURL} from "@/router";
 import axios from 'axios';
 import {toDate} from "@/helper";
 
-type Graph = [
+type GraphItem = {
     date: number,
     value: number,
-]
+}
+
+type Graph = Array<GraphItem>;
 
 type Table = {
     title: string,
@@ -42,18 +44,22 @@ export const useDataStore = defineStore('data',()=>{
     };
 
     const  chartData = ()=>{
-        const graphData:any = graph.value;
+        const graphData:Graph = graph.value;
         const dates= Object.keys(graphData).map((index)=>{
-            const item= graphData[index]
+            const item= graphData[parseInt(index)]
             return toDate(item.date).toLocaleString();
         });
         const values= Object.keys(graphData).map((index)=>{
-            const item= graphData[index]
+            const item= graphData[parseInt(index)]
             return item.value;
         });
         return {
             labels: dates,
-            datasets: [{data:values}]
+            datasets: [{
+                label:'values',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                data:values
+            }]
         }
 
     }
