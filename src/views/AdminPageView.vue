@@ -13,6 +13,7 @@ import AdminSettings from "@/components/AdminSettings.vue";
 import AdminGraph from "@/components/AdminGraph.vue";
 import {useSettingsStore} from "@/stores/settings";
 import {useDataStore} from "@/stores/data";
+import {adminPages} from "@/router";
 
 
 type AdminPages = {

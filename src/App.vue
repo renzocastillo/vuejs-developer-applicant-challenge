@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import {onMounted, type PropType} from "vue";
 import { RouterLink, RouterView } from 'vue-router'
+import {adminPages} from "@/router";
 import Header from './components/Header.vue'
 interface AdminPages{
   table:string,

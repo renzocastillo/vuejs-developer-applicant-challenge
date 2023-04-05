@@ -27,7 +27,7 @@ const chartOptions = {
   responsive: true,
   plugins: {
     legend: {
-      onClick: null
+      onClick: ()=>{}
     }
   }
 }
