@@ -103,17 +103,15 @@ class SettingsRoutesController extends ApiRoutesController {
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data_permissions() {
-		$response = 'true';
-
-		return rest_ensure_response( $response );
+		//return current_user_can( 'administrator' );
+		return rest_ensure_response('true');
 	}
 
 	/**
-	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+	 *
 	 */
 	public function update_data_permissions() {
-		$response = 'true';
-
-		return rest_ensure_response( $response );
+		//return current_user_can( 'administrator' );
+		return rest_ensure_response('true');
 	}
 }

@@ -60,7 +60,6 @@ const addEmailField = () => {
 
 const removeEmailField = async (index: number) => {
   emails.value.splice(index, 1);
-  console.log(emails.value);
   updateEmailsSetting();
 };
 

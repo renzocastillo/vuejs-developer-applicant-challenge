@@ -43,9 +43,7 @@ class RemoteDataRoutesController extends ApiRoutesController {
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data_permissions() {
-		$response = 'true';
-
-		return rest_ensure_response( $response );
+		return rest_ensure_response( 'true' );
 	}
 
 }

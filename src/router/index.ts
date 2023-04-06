@@ -7,6 +7,7 @@ interface WPData{
     ajaxURL: string,
     apiURL: string,
     basePath: string,
+    nonce: string,
 }
 declare global {
     interface Window { wpData: WPData }
@@ -19,8 +20,9 @@ const wpData= window.wpData ||
         'ajaxURL':'https://vue-plugin.test/wp-admin/admin_ajax.php',
         'apiURL':'https://vue-plugin.test/wp-json',
         'basePath':'',
+        'nonce':'abc',
     };
-const {adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath} = wpData;
+const {adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath,nonce} = wpData;
 const router = createRouter({
   history: createWebHistory(basePath),
   routes: [
@@ -33,4 +35,4 @@ const router = createRouter({
   ],
 })
 
-export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath};
+export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath,nonce};

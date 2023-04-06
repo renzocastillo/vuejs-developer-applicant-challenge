@@ -77,7 +77,7 @@ class Admin {
 	 * @return void
 	 */
 	public function load_scripts() {
-		wp_register_script( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.js', array(), wp_rand(), true );
+		wp_register_script( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.js', array(), null, true );
 		wp_enqueue_script( 'vue-app' );
 		$args = array(
 			'adminURL'   => admin_url( '/' ),
@@ -90,6 +90,7 @@ class Admin {
 			'ajaxURL'    => admin_url( 'admin-ajax.php' ),
 			'apiURL'     => home_url( '/wp-json' ),
 			'basePath'   => '/wp-admin',
+			'nonce'      => wp_create_nonce( 'vue-app-nonce' ),
 		);
 		wp_localize_script( 'vue-app', 'wpData', $args );
 
