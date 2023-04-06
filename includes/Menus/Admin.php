@@ -90,7 +90,7 @@ class Admin {
 			'ajaxURL'    => admin_url( 'admin-ajax.php' ),
 			'apiURL'     => home_url( '/wp-json' ),
 			'basePath'   => '/wp-admin',
-			'nonce'      => wp_create_nonce( 'vue-app-nonce' ),
+			'nonce'      => wp_create_nonce( 'wp_rest' ),
 		);
 		wp_localize_script( 'vue-app', 'wpData', $args );
 
