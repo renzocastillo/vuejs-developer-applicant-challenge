@@ -12,9 +12,9 @@
       </nav>
     </div>
   </header>
-  <Suspense v-if="adminPages!= undefined">
-  <RouterView :adminPages="adminPages"/>
-  </Suspense>
+
+    <RouterView :adminPages="adminPages"/>
+
 </template>
 
 <style scoped>

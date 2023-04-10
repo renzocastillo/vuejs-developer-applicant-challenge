@@ -37,9 +37,9 @@ interface HTMLInputEvent extends Event {
 }
 
 const settings = useSettingsStore();
-const humandate = ref(settings.humandate);
-const emails = ref(settings.emails);
-const numrows = ref(settings.numrows);
+const humandate = ref(true);
+const emails = ref(['']);
+const numrows = ref(0);
 const popupShow = ref(false);
 const popupLabel = ref('');
 
@@ -89,6 +89,13 @@ watch(numrows, async (current: number, prev: number) => {
     poppupShow('Numrows was not updated');
   }
 })
-
+console.log(settings.numrows);
+if(numrows.value == 0){
+    console.log("entra");
+    await settings.callSettings();
+    humandate.value = settings.humandate
+    emails.value = settings.emails;
+    numrows.value = settings.numrows;
+}
 
 </script>

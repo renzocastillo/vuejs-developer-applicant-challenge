@@ -1,7 +1,7 @@
 <template>
-  <h2>Table page</h2>
+  <h2>{{data.table.title}}</h2>
   <TableComponent
-      :fields='data.table.data.headers'
+      :fields="data.table.data.headers"
       :items ="data.table.data.rows"
   />
   <ListComponent/>
@@ -12,7 +12,12 @@
 import TableComponent from "@/components/TableComponent.vue";
 import ListComponent from "@/components/ListComponent.vue";
 import {useDataStore} from "@/stores/data";
+import {useSettingsStore} from "@/stores/settings";
 
 const data = useDataStore();
+if(Object.keys(data.table).length == 0){
+    await data.callData();
+}
+
 </script>
 

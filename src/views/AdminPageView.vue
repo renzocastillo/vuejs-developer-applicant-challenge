@@ -1,13 +1,19 @@
 <template>
-  <main v-if="page!='' && adminPages!= undefined">
-    <AdminTable v-if="page=== adminPages.table"/>
-    <AdminGraph v-if="page=== adminPages.graph"/>
-    <AdminSettings v-if="page=== adminPages.settings"/>
-  </main>
+    <main v-if="page!='' && adminPages!= undefined">
+        <suspense>
+            <AdminTable v-if="page=== adminPages.table"/>
+        </suspense>
+        <suspense>
+            <AdminGraph v-if="page=== adminPages.graph"/>
+        </suspense>
+        <suspense>
+            <AdminSettings v-if="page=== adminPages.settings"/>
+        </suspense>
+    </main>
 </template>
 
 <script setup lang="ts">
-import {inject} from 'vue'
+import {inject, onBeforeMount, onMounted} from 'vue'
 import AdminTable from '@/components/AdminTable.vue'
 import AdminSettings from "@/components/AdminSettings.vue";
 import AdminGraph from "@/components/AdminGraph.vue";
@@ -17,21 +23,15 @@ import {adminPages} from "@/router";
 
 
 type AdminPages = {
-  table: string,
-  graph: string,
-  settings: string,
+    table: string,
+    graph: string,
+    settings: string,
 }
 
 const props = defineProps<{
-  page: string,
-  adminPages: AdminPages,
+    page: string,
+    adminPages: AdminPages,
 }>();
-
-const settings = useSettingsStore();
-const data = useDataStore();
-
-await data.callData();
-await settings.callSettings();
 
 
 </script>

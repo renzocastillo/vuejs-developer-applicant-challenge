@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AdminPageView from '../views/AdminPageView.vue'
 interface WPData{
     adminURL: string,
     adminPath: string,
@@ -29,7 +28,7 @@ const router = createRouter({
     {
         path: adminPath,
         name: 'admin',
-        component:AdminPageView,
+        component: async () => await import( '../views/AdminPageView.vue'),
         props: route => ({ page: route.query.page || '' })
     }
   ],

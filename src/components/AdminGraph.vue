@@ -13,4 +13,7 @@ import BarChartComponent from "@/components/BarChartComponent.vue";
 import {useDataStore} from "@/stores/data";
 
 const data=useDataStore();
+if(Object.keys(data.table).length == 0){
+    await data.callData();
+}
 </script>

@@ -14,4 +14,7 @@ import ListItemComponent from "@/components/ListItemComponent.vue";
 import {useSettingsStore} from "@/stores/settings";
 
 const settings = useSettingsStore();
+if(settings.emails[0].length == 0) {
+    await settings.callSettings();
+}
 </script>
