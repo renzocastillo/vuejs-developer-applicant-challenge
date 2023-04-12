@@ -1,6 +1,6 @@
 <?php
 
-namespace Includes\Apis\Routes;
+namespace Includes\Apis;
 
 use Includes\Controllers\ApiRoutesController;
 use WP_Error;
@@ -10,7 +10,7 @@ use WP_REST_Response;
 /**
  *
  */
-class RemoteDataRoutesController extends ApiRoutesController {
+class DataApi extends ApiRoutesController {
 	/**
 	 * @var string
 	 */
@@ -43,7 +43,8 @@ class RemoteDataRoutesController extends ApiRoutesController {
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data_permissions() {
-		return rest_ensure_response( 'true' );
+		//return rest_ensure_response( 'true' );
+		return current_user_can( 'administrator' );
 	}
 
 }
