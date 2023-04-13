@@ -62,9 +62,6 @@ class ApiRoutesController extends WP_REST_Controller {
 
 	}
 
-	/**
-	 * @return void
-	 */
 	public function get_data_permissions() {
 
 	}
@@ -78,9 +75,6 @@ class ApiRoutesController extends WP_REST_Controller {
 
 	}
 
-	/**
-	 * @return void
-	 */
 	public function update_data_permissions() {
 
 	}

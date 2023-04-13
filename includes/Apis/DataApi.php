@@ -40,11 +40,11 @@ class DataApi extends ApiRoutesController {
 	}
 
 	/**
-	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+	 *
 	 */
 	public function get_data_permissions() {
-		//return rest_ensure_response( 'true' );
 		return current_user_can( 'administrator' );
+		//return rest_ensure_response( 'true' );
 	}
 
 }

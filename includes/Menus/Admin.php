@@ -77,7 +77,7 @@ class Admin {
 	 * @return void
 	 */
 	public function load_scripts() {
-		wp_register_script( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.js', array(), null, true );
+		wp_register_script( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.js', array(), RCRC_VERSION, true );
 		wp_enqueue_script( 'vue-app' );
 		$args = array(
 			'adminURL'   => admin_url( '/' ),

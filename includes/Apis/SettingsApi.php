@@ -100,7 +100,7 @@ class SettingsApi extends ApiRoutesController {
 	}
 
 	/**
-	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
+	 *
 	 */
 	public function get_data_permissions() {
 		return current_user_can( 'administrator' );
