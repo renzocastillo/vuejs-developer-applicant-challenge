@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import {defineStore} from "pinia";
 import {ref} from "vue";
 import {apiURL, nonce} from "@/router";
@@ -10,9 +10,17 @@ type SettingsDataResponse ={
 }
 
 export const useSettingsStore = defineStore('setter',()=>{
-    const emails = ref(['']);
+    const emails = ref<string []>([]);
     const humandate = ref(true);
     const numrows = ref(0);
+    let callSettingsError: Error = {
+        name: "",
+        message: ""
+    }
+    let updateSettingError: Error = {
+        name: "",
+        message: ""
+    }
 
     const callSettings = async () => {
         const apiGetSettings = apiURL + "/renzo/v1/settings";
@@ -24,27 +32,39 @@ export const useSettingsStore = defineStore('setter',()=>{
             withCredentials: true,
             credentials: 'same-origin',
         }
-        const {
-            emails : emailsData,
-            humandate: humandateData,
-            numrows: numrowsData
-        } = await axios.get(apiGetSettings).then(({data}: { data: SettingsDataResponse }) => {
-            return data;
-        })
-        emails.value = emailsData;
-        humandate.value = humandateData;
-        numrows.value = parseInt(numrowsData);
+        try {
+            const {
+                emails: emailsData,
+                humandate: humandateData,
+                numrows: numrowsData
+            } = await axios.get(apiGetSettings, config).then(({data}: { data: SettingsDataResponse }) => {
+                return data;
+            });
+            emails.value = emailsData;
+            humandate.value = humandateData;
+            numrows.value = parseInt(numrowsData);
+        }catch (e:unknown){
+            if (axios.isAxiosError(e)) {
+                callSettingsError.name=e.message;
+                if(e.response){
+                    if(e.response.data){
+                        callSettingsError.message= e.response.data.message;
+                    }
+                }
+            } else {
+                callSettingsError.name="Error";
+                callSettingsError.message="Unexpected error ocurred"
+            }
+        }
     }
 
     const updateSetting = async (key:string, value:any)=> {
-        console.log("key is");
+        /*console.log("key is");
         console.log(key);
         console.log("value is");
         console.log(value);
-        //const apigetNonce = apiURL + "/renzo/v1/nonce";
+        console.log(nonce);*/
         const apiUpdateSettings = apiURL + "/renzo/v1/settings";
-        //const nonce= await axios.get(apigetNonce,{withCredentials:true}).then(({data})=>{ return data });
-        console.log(nonce);
         const data = {
             key: key,
             value: value,
@@ -56,30 +76,39 @@ export const useSettingsStore = defineStore('setter',()=>{
             },
             withCredentials: true,
         }
-
-        const updated = await axios.post(apiUpdateSettings, data, config).then(({data}: { data: boolean }) => {
-            if (data) {
-                switch (key) {
-                    case 'emails':
-                        emails.value = value;
-                        break;
-                    case 'humandate':
-                        humandate.value = value;
-                        break;
-                    case 'numrows':
-                        numrows.value = value;
-                        break;
+        try {
+            const updated = await axios.post(apiUpdateSettings, data, config).then(({data}: { data: boolean }) => {
+                if (data) {
+                    switch (key) {
+                        case 'emails':
+                            emails.value = value;
+                            break;
+                        case 'humandate':
+                            humandate.value = value;
+                            break;
+                        case 'numrows':
+                            numrows.value = value;
+                            break;
+                    }
                 }
+                return data;
+            });
+            return updated;
+        }catch (e: unknown){
+            if (axios.isAxiosError(e)) {
+                updateSettingError.name=e.message;
+                if(e.response){
+                    if(e.response.data){
+                        updateSettingError.message= e.response.data.message;
+                    }
+                }
+            } else {
+                updateSettingError.name="Error";
+                updateSettingError.message="Unexpected error ocurred"
             }
-            return data;
-        }).catch((error) => {
-            console.log("hubo un error");
-            // @ts-ignore
-            console.error(error.response.status);
-        })
-        return updated;
+        }
 
     }
 
-    return {emails, humandate, numrows, callSettings, updateSetting}
+    return {emails, humandate, numrows, callSettingsError,updateSettingError,callSettings, updateSetting}
 })

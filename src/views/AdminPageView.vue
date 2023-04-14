@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import {inject, onBeforeMount, onMounted} from 'vue'
 import AdminTable from '@/components/AdminTable.vue'
 import AdminSettings from "@/components/AdminSettings.vue";
 import AdminGraph from "@/components/AdminGraph.vue";

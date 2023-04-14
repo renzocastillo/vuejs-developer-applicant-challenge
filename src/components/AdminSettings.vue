@@ -28,21 +28,27 @@
 </style>
 
 <script setup lang="ts">
-import {onMounted, reactive, ref, watch} from "vue";
+import {onMounted, reactive, ref, watch,shallowRef} from "vue";
 import {useSettingsStore} from "@/stores/settings";
 
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement
 }
-
-const settings = useSettingsStore();
+/*const settings = useSettingsStore();
 const humandate = ref(true);
-const emails = ref(['']);
+const emails = ref<string []>([]);
 const numrows = ref(0);
 const popupShow = ref(false);
-const popupLabel = ref('');
+const popupLabel = ref('');*/
 
+const settings = useSettingsStore();
+await settings.callSettings();
+const humandate = shallowRef(settings.humandate);
+const emails = shallowRef<string []>(settings.emails);
+const numrows = shallowRef(settings.numrows);
+const popupShow = ref(false);
+const popupLabel = ref('');
 
 const poppupShow = (label: string) => {
   popupLabel.value = label;
@@ -64,38 +70,62 @@ const removeEmailField = async (index: number) => {
 };
 
 const updateEmailsSetting = async () => {
-  const updated = await settings.updateSetting('emails', emails.value);
-  if(updated){
-    poppupShow('Emails were updated');
-  }else{
-    poppupShow('Emails were not updated');
-  }
-
+    const updated = await settings.updateSetting('emails', emails.value);
+    console.log(settings.updateSettingError);
+    if (settings.updateSettingError.name != '') {
+        poppupShow(settings.updateSettingError.name + ': ' + settings.updateSettingError.message);
+        settings.updateSettingError = {name: "", message: ""}
+    } else {
+        if (updated) {
+            poppupShow('Emails were updated');
+        } else {
+            poppupShow('Emails were not updated');
+        }
+    }
 }
+
 watch(humandate, async (current: boolean, prev: boolean) => {
-  const updated = await settings.updateSetting('humandate', current);
-  if(updated){
-    poppupShow('Humandate was updated');
-  }else{
-    poppupShow('Humandate was not updated');
-  }
+    console.log(current);
+    console.log(prev);
+    if(current !=prev) {
+        const updated = await settings.updateSetting('humandate', current);
+        if (updated) {
+            poppupShow('Humandate was updated');
+        } else {
+            poppupShow('Humandate was not updated');
+        }
+    }
 })
 
 watch(numrows, async (current: number, prev: number) => {
-  const updated = await settings.updateSetting('numrows', current);
-  if(updated){
-    poppupShow('Numrows was updated');
-  }else{
-    poppupShow('Numrows was not updated');
-  }
+    if(current !=prev && prev!=0){
+        console.log(current);
+        console.log(prev);
+        const updated = await settings.updateSetting('numrows', current);
+        if(updated){
+            poppupShow('Numrows was updated');
+
+        }else{
+            poppupShow('Numrows was not updated');
+        }
+    }
 })
-console.log(settings.numrows);
-if(numrows.value == 0){
-    console.log("entra");
-    await settings.callSettings();
-    humandate.value = settings.humandate
-    emails.value = settings.emails;
-    numrows.value = settings.numrows;
+
+if(settings.callSettingsError.name != ''){
+    poppupShow(settings.callSettingsError.name+': '+settings.callSettingsError.message);
+    settings.callSettingsError= { name: "", message: ""}
 }
+/*if (numrows.value == 0) {
+    await settings.callSettings();
+
+    if(settings.callSettingsError.name != ''){
+        poppupShow(settings.callSettingsError.name+': '+settings.callSettingsError.message);
+        settings.callSettingsError= { name: "", message: ""}
+    }else{
+        humandate.value = settings.humandate
+        emails.value = settings.emails;
+        numrows.value = settings.numrows;
+    }
+}*/
 
 </script>

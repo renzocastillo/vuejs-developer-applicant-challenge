@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {inject, ref} from "vue";
-import {apiURL} from "@/router";
+import {apiURL, nonce} from "@/router";
 import axios from 'axios';
 import {toDate} from "@/helper";
 
@@ -34,7 +34,15 @@ export const useDataStore = defineStore('data',()=>{
     const table = ref(<Table>{});
     const callData = async (update:boolean = false) => {
         const apiRemoteData = apiURL + "/renzo/v1/remote-data"+ "?update="+update
-        const {table: tableData, graph: graphData} = await axios.get(apiRemoteData).then(({data}: { data: RemoteDataResponse }) => {
+        const config = {
+            headers: {
+                'X-WP-Nonce': nonce,
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'same-origin',
+        }
+        const {table: tableData, graph: graphData} = await axios.get(apiRemoteData,config).then(({data}: { data: RemoteDataResponse }) => {
             return data;
         });
         graph.value = graphData;
