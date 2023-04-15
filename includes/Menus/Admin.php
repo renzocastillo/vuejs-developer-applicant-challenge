@@ -118,7 +118,11 @@ class Admin {
 	 * @return void
 	 */
 	public function menu_page_template() {
-		echo '<div class="wrap"><div id="app"></div></div>';
+
+		echo '<noscript>Sorry, this page requires JavaScript to function properly. Please enable JavaScript in your browser and try again.</noscript>';
+
+		echo '<div class="wrap"><div id="app" v-cloak></div></div>';
+
 	}
 
 }
