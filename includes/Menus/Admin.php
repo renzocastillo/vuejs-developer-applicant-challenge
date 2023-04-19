@@ -10,6 +10,7 @@ class Admin {
 	 *
 	 */
 	public function __construct() {
+		add_action( 'in_admin_header', array( $this, 'my_plugin_admin_header' ) );
 		add_action( 'admin_menu', array( $this, 'create_admin_menu' ), 11 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts_and_styles' ) );
 	}
@@ -71,6 +72,7 @@ class Admin {
 	public function load_styles() {
 		wp_register_style( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.css', array(), true, 'all' );
 		wp_enqueue_style( 'vue-app' );
+
 	}
 
 	/**
@@ -123,6 +125,17 @@ class Admin {
 
 		echo '<div class="wrap"><div id="app" v-cloak></div></div>';
 
+	}
+
+
+	public function my_plugin_admin_header() {
+		$template_path = RCRC_PLUGIN_PATH . 'includes/Templates/';
+		$top_level_page = 'toplevel_page_renzo-castillo';
+		$base_slug     = 'renzo-castillo';
+		$screen        = get_current_screen();
+		if ( strpos( $screen->id, $base_slug ) === 0 || $screen->id === $top_level_page ) {
+			include_once( $template_path . 'header.php' );
+		}
 	}
 
 }

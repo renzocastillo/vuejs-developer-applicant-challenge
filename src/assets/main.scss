@@ -1,5 +1,4 @@
 #app {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
 
@@ -10,4 +9,28 @@
     color: hsla(160, 100%, 37%, 1);
     transition: 0.4s;
   }
+
+  .tabs-container {
+    min-height: 58px;
+    background-color: #fff;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+
+    a {
+      border-bottom: 2px solid #fff;
+      box-shadow: none;
+      color: #666;
+      display: inline-block;
+      margin-right: 30px;
+      padding: 20px 0 18px 0;
+      text-decoration: none;
+
+      &:active{
+        border-bottom: 2px solid #e27730;
+      }
+
+    }
+
+  }
+
 }

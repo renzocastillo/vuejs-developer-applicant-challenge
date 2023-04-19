@@ -3,13 +3,11 @@
         <!--    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />-->
 
         <div class="wrapper">
-            <Header msg="You did it!"/>
-
-            <nav v-if="adminPages!= undefined">
+            <div v-if="adminPages!= undefined" class="tabs-container">
                 <RouterLink :to="{ name: 'admin', query: { page: adminPages.table }}">Table</RouterLink>
                 <RouterLink :to="{ name: 'admin', query: { page: adminPages.graph }}">Graph</RouterLink>
                 <RouterLink :to="{ name: 'admin', query: { page: adminPages.settings }}">Settings</RouterLink>
-            </nav>
+            </div>
         </div>
     </header>
 
