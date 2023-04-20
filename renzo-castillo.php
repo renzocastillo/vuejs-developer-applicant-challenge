@@ -13,7 +13,6 @@
  */
 
 // Your code starts here.
-// No direct access allowed.
 use Includes\Controllers\ServicesController;
 
 if ( ! defined( 'ABSPATH' ) ) {

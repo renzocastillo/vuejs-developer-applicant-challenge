@@ -104,7 +104,6 @@ class SettingsApi extends ApiRoutesController {
 	 */
 	public function get_data_permissions() {
 		return current_user_can( 'administrator' );
-		//return rest_ensure_response('true');
 	}
 
 	/**
@@ -112,6 +111,5 @@ class SettingsApi extends ApiRoutesController {
 	 */
 	public function update_data_permissions() {
 		return current_user_can( 'administrator' );
-		//return rest_ensure_response('true');
 	}
 }

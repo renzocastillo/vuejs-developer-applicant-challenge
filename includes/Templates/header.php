@@ -1,16 +1,15 @@
 <?php
+/** Template Header
+ *
+ * @package renzo-castillo *
+ */
+
 ?>
-<div id="wp-mail-smtp-header">
-	<img class="wp-mail-smtp-header-logo" src="https://vue-plugin.test/wp-content/plugins/wp-mail-smtp/assets/images/logo.svg" alt="WP Mail SMTP">
+<div id="reca-header">
+	<img class="reca-header-logo" src="https://vue-plugin.test/wp-content/plugins/wp-mail-smtp/assets/images/logo.svg" alt="Renzo Castillo">
 </div>
 
 <style scoped>
-    #wp-mail-smtp-header {
-        border-top: 3px solid #e27730;
-        padding: 24px 20px;
-    }
-
-    #wp-mail-smtp-header img{
-	    height: 65px;
-    }
+	#reca-header { border-top: 3px solid #e27730; padding: 24px 20px; }
+	.reca-header-logo { height: 65px; }
 </style>
