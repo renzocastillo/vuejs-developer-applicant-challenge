@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection SpellCheckingInspection */
 /**
  * Plugin Name:     Renzo Castillo
  * Plugin URI:      PLUGIN SITE HERE
@@ -25,7 +25,7 @@ require_once 'vendor/autoload.php';
 /**
  *
  */
-final class RenzoCastillo {
+final class RECA_RenzoCastillo {
 
 	/**
 	 *
@@ -41,21 +41,21 @@ final class RenzoCastillo {
 	 * @return void
 	 */
 	public function constants() {
-		define( 'RCRC_VERSION', '1.0.0' );
-		define( 'RCRC_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
-		define( 'RCRC_PLUGIN_URL', trailingslashit( plugins_url( '', __FILE__ ) ) );
-		define( 'RCRC_API_NAMESPACE', 'renzo/v1' );
-		define( 'RCRC_API_DATA_TRANSIENT', 'rcrc_api_data' );
-		define( 'RCRC_SETTINGS_OPTION', 'test_project_option' );
-		define( 'RCRC_MENU_SLUG', 'renzo-castillo' );
-		define( 'RCRC_DOMAIN_NAME', 'renzo-castillo' );
+		define( 'RECA_VERSION', '1.0.0' );
+		define( 'RECA_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+		define( 'RECA_PLUGIN_URL', trailingslashit( plugins_url( '', __FILE__ ) ) );
+		define( 'RECA_API_NAMESPACE', 'renzo-castillo/v1' );
+		define( 'RECA_API_DATA_TRANSIENT', 'reca_api_data' );
+		define( 'RECA_SETTINGS_OPTION', 'test_project_option' );
+		define( 'RECA_MENU_SLUG', 'renzo-castillo' );
+		define( 'RECA_DOMAIN_NAME', 'renzo-castillo' );
 	}
 
 	/**
 	 * @return void
 	 */
 	public function activate() {
-		$settings_option_name = RCRC_SETTINGS_OPTION;
+		$settings_option_name = RECA_SETTINGS_OPTION;
 		$settings_exists      = get_option( $settings_option_name );
 		if ( ! $settings_exists ) {
 			$value = array(
@@ -85,4 +85,4 @@ final class RenzoCastillo {
 
 }
 
-new RenzoCastillo();
+new RECA_RenzoCastillo();

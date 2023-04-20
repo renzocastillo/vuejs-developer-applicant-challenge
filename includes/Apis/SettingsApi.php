@@ -24,7 +24,7 @@ class SettingsApi extends ApiRoutesController {
 	public function update_data( $request ) {
 		$key             = $request['key'];
 		$value           = $request['value'];
-		$settings_option = RCRC_SETTINGS_OPTION;
+		$settings_option = RECA_SETTINGS_OPTION;
 		$settings        = get_option( $settings_option );
 		$result          = false;
 		if ( array_key_exists( $key, $settings ) ) {
@@ -93,7 +93,7 @@ class SettingsApi extends ApiRoutesController {
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data( $data = array() ) {
-		$settings_option = RCRC_SETTINGS_OPTION;
+		$settings_option = RECA_SETTINGS_OPTION;
 		$settings        = get_option( $settings_option );
 
 		return rest_ensure_response( $settings );

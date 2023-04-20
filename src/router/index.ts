@@ -5,6 +5,9 @@ interface WPData{
     adminPages: any,
     ajaxURL: string,
     apiURL: string,
+    apiName: string,
+    apiSettings: string,
+    apiData: string,
     basePath: string,
     nonce: string,
 }
@@ -17,11 +20,14 @@ const wpData= window.wpData ||
         'adminPath': '',
         'adminPages': {table:'renzo-castillo',graph:'renzo-castillo-graph',settings:'renzo-castillo-settings'},
         'ajaxURL':'https://vue-plugin.test/wp-admin/admin_ajax.php',
-        'apiURL':'https://vue-plugin.test/wp-json',
+        'apiURL':'https://vue-plugin.test/wp-json/',
+        'apiName': 'renzo-castillo/v1',
+        'apiSettings': '/settings',
+        'apiData': '/remote-data',
         'basePath':'',
         'nonce':'abc',
     };
-const {adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath,nonce} = wpData;
+const {adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName,apiSettings, apiData, basePath,nonce} = wpData;
 const router = createRouter({
   history: createWebHistory(basePath),
   routes: [
@@ -34,4 +40,4 @@ const router = createRouter({
   ],
 })
 
-export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,basePath,nonce};
+export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName, apiSettings, apiData, basePath,nonce};

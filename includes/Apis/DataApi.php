@@ -20,7 +20,7 @@ class DataApi extends ApiRoutesController {
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data( $data = array() ) {
-		$api_data_transient = RCRC_API_DATA_TRANSIENT;
+		$api_data_transient = RECA_API_DATA_TRANSIENT;
 		$transient_data     = get_transient( $api_data_transient );
 		$update_data        = ! empty( $data ) && rest_sanitize_boolean( $data['update'] );
 

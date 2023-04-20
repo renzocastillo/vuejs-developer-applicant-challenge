@@ -25,7 +25,7 @@ class ApiRoutesController extends WP_REST_Controller {
 	/**
 	 */
 	public function __construct() {
-		$this->namespace = RCRC_API_NAMESPACE;
+		$this->namespace = RECA_API_NAMESPACE;
 		$this->args      = array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import {defineStore} from "pinia";
 import {ref} from "vue";
-import {apiURL, nonce} from "@/router";
+import {apiName, apiSettings, apiURL, nonce} from "@/router";
 
 type SettingsDataResponse ={
     numrows: string,
@@ -23,7 +23,7 @@ export const useSettingsStore = defineStore('setter',()=>{
     }
 
     const callSettings = async () => {
-        const apiGetSettings = apiURL + "/renzo/v1/settings";
+        const apiGetSettings = apiURL + apiName + apiSettings;
         const config = {
             headers: {
                 'X-WP-Nonce': nonce,
@@ -64,7 +64,7 @@ export const useSettingsStore = defineStore('setter',()=>{
         console.log("value is");
         console.log(value);
         console.log(nonce);*/
-        const apiUpdateSettings = apiURL + "/renzo/v1/settings";
+        const apiUpdateSettings = apiURL + apiName + apiSettings;
         const data = {
             key: key,
             value: value,

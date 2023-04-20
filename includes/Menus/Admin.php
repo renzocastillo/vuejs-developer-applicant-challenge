@@ -20,10 +20,10 @@ class Admin {
 	 */
 	public function create_admin_menu() {
 		$capability  = 'manage_options';
-		$menu_slug   = RCRC_MENU_SLUG;
+		$menu_slug   = RECA_MENU_SLUG;
 		$graph       = $menu_slug . '-graph';
 		$settings    = $menu_slug . '-settings';
-		$text_domain = RCRC_DOMAIN_NAME;
+		$text_domain = RECA_DOMAIN_NAME;
 		add_menu_page(
 			__( 'Renzo Castillo', 'renzo-castillo' ),
 			__( 'Renzo Castillo', 'renzo-castillo' ),
@@ -70,7 +70,7 @@ class Admin {
 	 * @return void
 	 */
 	public function load_styles() {
-		wp_register_style( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.css', array(), true, 'all' );
+		wp_register_style( 'vue-app', RECA_PLUGIN_URL . 'dist/assets/index.css', array(), true, 'all' );
 		wp_enqueue_style( 'vue-app' );
 
 	}
@@ -79,20 +79,23 @@ class Admin {
 	 * @return void
 	 */
 	public function load_scripts() {
-		wp_register_script( 'vue-app', RCRC_PLUGIN_URL . 'dist/assets/index.js', array(), RCRC_VERSION, true );
+		wp_register_script( 'vue-app', RECA_PLUGIN_URL . 'dist/assets/index.js', array(), RECA_VERSION, true );
 		wp_enqueue_script( 'vue-app' );
 		$args = array(
-			'adminURL'   => admin_url( '/' ),
-			'adminPath'  => '/admin.php',
-			'adminPages' => array(
+			'adminURL'    => admin_url( '/' ),
+			'adminPath'   => '/admin.php',
+			'adminPages'  => array(
 				'table'    => 'renzo-castillo',
 				'graph'    => 'renzo-castillo-graph',
 				'settings' => 'renzo-castillo-settings',
 			),
-			'ajaxURL'    => admin_url( 'admin-ajax.php' ),
-			'apiURL'     => home_url( '/wp-json' ),
-			'basePath'   => '/wp-admin',
-			'nonce'      => wp_create_nonce( 'wp_rest' ),
+			'ajaxURL'     => admin_url( 'admin-ajax.php' ),
+			'apiURL'      => home_url( '/wp-json/' ),
+			'apiName'     => RECA_API_NAMESPACE,
+			'apiSettings' => '/settings',
+			'apiData'     => '/remote-data',
+			'basePath'    => '/wp-admin',
+			'nonce'       => wp_create_nonce( 'wp_rest' ),
 		);
 		wp_localize_script( 'vue-app', 'wpData', $args );
 
@@ -129,10 +132,10 @@ class Admin {
 
 
 	public function my_plugin_admin_header() {
-		$template_path = RCRC_PLUGIN_PATH . 'includes/Templates/';
+		$template_path  = RECA_PLUGIN_PATH . 'includes/Templates/';
 		$top_level_page = 'toplevel_page_renzo-castillo';
-		$base_slug     = 'renzo-castillo';
-		$screen        = get_current_screen();
+		$base_slug      = 'renzo-castillo';
+		$screen         = get_current_screen();
 		if ( strpos( $screen->id, $base_slug ) === 0 || $screen->id === $top_level_page ) {
 			include_once( $template_path . 'header.php' );
 		}

@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {inject, ref} from "vue";
-import {apiURL, nonce} from "@/router";
+import {apiData, apiName, apiURL, nonce} from "@/router";
 import axios from 'axios';
 import {toDate} from "@/helper";
 
@@ -33,7 +33,7 @@ export const useDataStore = defineStore('data',()=>{
     const graph = ref(<Graph>{});
     const table = ref(<Table>{});
     const callData = async (update:boolean = false) => {
-        const apiRemoteData = apiURL + "/renzo/v1/remote-data"+ "?update="+update
+        const apiRemoteData = apiURL + apiName + apiData + "?update="+update
         const config = {
             headers: {
                 'X-WP-Nonce': nonce,
