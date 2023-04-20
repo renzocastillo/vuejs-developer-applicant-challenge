@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 interface WPData{
     adminURL: string,
     adminPath: string,
@@ -10,6 +11,19 @@ interface WPData{
     apiData: string,
     basePath: string,
     nonce: string,
+    translationStrings: {
+        table_page: string,
+        graph_page: string,
+        graph_values: string,
+        settings_page: string,
+        numrows: string,
+        humandate: string,
+        emails: string,
+        emails_list: string,
+        remove: string,
+        add: string,
+        refresh: string,
+    }
 }
 declare global {
     interface Window { wpData: WPData }
@@ -27,7 +41,7 @@ const wpData= window.wpData ||
         'basePath':'',
         'nonce':'abc',
     };
-const {adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName,apiSettings, apiData, basePath,nonce} = wpData;
+const {adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName,apiSettings, apiData, basePath,nonce,translationStrings} = wpData;
 const router = createRouter({
   history: createWebHistory(basePath),
   routes: [
@@ -40,4 +54,4 @@ const router = createRouter({
   ],
 })
 
-export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName, apiSettings, apiData, basePath,nonce};
+export { router, adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName, apiSettings, apiData, basePath,nonce,translationStrings};

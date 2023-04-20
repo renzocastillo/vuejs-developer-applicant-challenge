@@ -1,0 +1,93 @@
+# Copyright (C) 2023 Renzo Castillo
+# This file is distributed under the same license as the Renzo Castillo plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Renzo Castillo 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vuejs-developer-applicant-challenge\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-04-20T18:36:21+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: renzo-castillo\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: includes/Menus/Admin.php:28
+#: includes/Menus/Admin.php:29
+msgid "Renzo Castillo"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "PLUGIN SITE HERE"
+msgstr ""
+
+#. Description of the plugin
+msgid "Vue.js developer applicant challenge"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "YOUR SITE HERE"
+msgstr ""
+
+#: includes/Menus/Admin.php:37
+#: includes/Menus/Admin.php:38
+msgid "Table"
+msgstr ""
+
+#: includes/Menus/Admin.php:45
+#: includes/Menus/Admin.php:46
+msgid "Graph"
+msgstr ""
+
+#: includes/Menus/Admin.php:53
+#: includes/Menus/Admin.php:54
+msgid "Settings"
+msgstr ""
+
+#: includes/Menus/Admin.php:100
+msgid "Table page"
+msgstr ""
+
+#: includes/Menus/Admin.php:101
+msgid "Graph page"
+msgstr ""
+
+#: includes/Menus/Admin.php:102
+msgid "Values"
+msgstr ""
+
+#: includes/Menus/Admin.php:103
+msgid "Settings page"
+msgstr ""
+
+#: includes/Menus/Admin.php:104
+msgid "Number of rows"
+msgstr ""
+
+#: includes/Menus/Admin.php:105
+msgid "Human Date"
+msgstr ""
+
+#: includes/Menus/Admin.php:106
+msgid "Emails"
+msgstr ""
+
+#: includes/Menus/Admin.php:107
+msgid "Emails list"
+msgstr ""
+
+#: includes/Menus/Admin.php:108
+msgid "Remove"
+msgstr ""
+
+#: includes/Menus/Admin.php:109
+msgid "Add"
+msgstr ""
+
+#: includes/Menus/Admin.php:110
+msgid "Refresh"
+msgstr ""

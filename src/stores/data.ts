@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {inject, ref} from "vue";
-import {apiData, apiName, apiURL, nonce} from "@/router";
+import {apiData, apiName, apiURL, nonce, translationStrings} from "@/router";
 import axios from 'axios';
 import {toDate} from "@/helper";
 
@@ -62,7 +62,7 @@ export const useDataStore = defineStore('data',()=>{
         return {
             labels: dates,
             datasets: [{
-                label:'values',
+                label: translationStrings.graph_values,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 data:values
             }]

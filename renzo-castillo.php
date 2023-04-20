@@ -80,6 +80,7 @@ final class RECA_RenzoCastillo {
 	 */
 	public function initialize() {
 		ServicesController::init();
+		load_plugin_textdomain( 'renzo-castillo', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 }

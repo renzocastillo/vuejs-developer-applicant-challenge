@@ -1,4 +1,5 @@
 <template>
+    <h4>{{props.title}}</h4>
   <table id="tableComponent" class="table table-bordered table-striped">
     <thead>
     <tr>
@@ -36,6 +37,7 @@ type Item = {
 }
 
 const props = defineProps<{
+  title: string,
   items: Item[],
   fields:string[],
 }>()

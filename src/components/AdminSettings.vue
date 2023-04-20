@@ -1,23 +1,23 @@
 <template>
   <div class="settings">
-    <h2>Settings page</h2>
+    <h2>{{ translationStrings.settings_page }}</h2>
     <div class="numrows-setting">
-      <label for="numrows">Numrows:</label>
+      <label for="numrows">{{ translationStrings.numrows }}:</label>
       <input type="number" v-model="settings.numrows" min="1" max="5" id="numrows">
     </div>
     <div class="humandate-setting">
-      <label for="humandate">Humandate:</label>
+      <label for="humandate">{{ translationStrings.humandate }}:</label>
       <input type="checkbox" v-model="settings.humandate" id="humandate"/>
 
     </div>
     <div class="emails-setting">
-      <label>Emails:</label>
+      <label>{{ translationStrings.emails }}:</label>
       <div v-for="(email,index) in settings.emails">
         <input type="text" v-model="settings.emails[index]" @change="updateEmailsSetting" :key="index">
-        <button @click="removeEmailField(index)" class="">- Remove</button>
+        <button @click="removeEmailField(index)" class="">- {{ translationStrings.remove }}</button>
       </div>
       <div v-if="settings.emails.length>=0">
-        <button @click="addEmailField" class="" :disabled="settings.emails.length==5">+ Add</button>
+        <button @click="addEmailField" class="" :disabled="settings.emails.length==5">+ {{ translationStrings.add }}</button>
       </div>
       <p v-if="popupShow">{{ popupLabel }}</p>
     </div>
@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref, watch,shallowRef} from "vue";
 import {useSettingsStore} from "@/stores/settings";
+import {translationStrings} from "../router";
 
 
 interface HTMLInputEvent extends Event {

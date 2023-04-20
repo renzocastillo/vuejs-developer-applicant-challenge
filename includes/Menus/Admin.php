@@ -82,20 +82,33 @@ class Admin {
 		wp_register_script( 'vue-app', RECA_PLUGIN_URL . 'dist/assets/index.js', array(), RECA_VERSION, true );
 		wp_enqueue_script( 'vue-app' );
 		$args = array(
-			'adminURL'    => admin_url( '/' ),
-			'adminPath'   => '/admin.php',
-			'adminPages'  => array(
+			'adminURL'           => admin_url( '/' ),
+			'adminPath'          => '/admin.php',
+			'adminPages'         => array(
 				'table'    => 'renzo-castillo',
 				'graph'    => 'renzo-castillo-graph',
 				'settings' => 'renzo-castillo-settings',
 			),
-			'ajaxURL'     => admin_url( 'admin-ajax.php' ),
-			'apiURL'      => home_url( '/wp-json/' ),
-			'apiName'     => RECA_API_NAMESPACE,
-			'apiSettings' => '/settings',
-			'apiData'     => '/remote-data',
-			'basePath'    => '/wp-admin',
-			'nonce'       => wp_create_nonce( 'wp_rest' ),
+			'ajaxURL'            => admin_url( 'admin-ajax.php' ),
+			'apiURL'             => home_url( '/wp-json/' ),
+			'apiName'            => RECA_API_NAMESPACE,
+			'apiSettings'        => '/settings',
+			'apiData'            => '/remote-data',
+			'basePath'           => '/wp-admin',
+			'nonce'              => wp_create_nonce( 'wp_rest' ),
+			'translationStrings' => array(
+				'table_page'    => __( 'Table page', 'renzo-castillo' ),
+				'graph_page'    => __( 'Graph page', 'renzo-castillo' ),
+				'graph_values'  => __( 'Values', 'renzo-castillo' ),
+				'settings_page' => __( 'Settings page', 'renzo-castillo' ),
+				'numrows'       => __( 'Number of rows', 'renzo-castillo' ),
+				'humandate'     => __( 'Human Date', 'renzo-castillo' ),
+				'emails'        => __( 'Emails', 'renzo-castillo' ),
+				'emails_list'   => __( 'Emails list', 'renzo-castillo' ),
+				'remove'        => __( 'Remove', 'renzo-castillo' ),
+				'add'           => __( 'Add', 'renzo-castillo' ),
+				'refresh'       => __( 'Refresh', 'renzo-castillo' ),
+			),
 		);
 		wp_localize_script( 'vue-app', 'wpData', $args );
 
