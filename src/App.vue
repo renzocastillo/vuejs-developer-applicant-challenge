@@ -1,7 +1,5 @@
 <template>
     <header>
-        <!--    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />-->
-
         <div class="wrapper">
             <div v-if="adminPages!= undefined" class="tabs-container">
                 <RouterLink :to="{ name: 'admin', query: { page: adminPages.table }}">Table</RouterLink>
@@ -19,10 +17,11 @@
 </style>
 
 <script setup lang="ts">
-import {onMounted, type PropType} from "vue";
+import {onBeforeMount, onMounted, type PropType} from "vue";
 import {RouterLink, RouterView} from 'vue-router'
 import {adminPages} from "@/router";
 import Header from './components/Header.vue'
+import {useSettingsStore} from "@/stores/settings";
 
 interface AdminPages {
     table: string,
@@ -35,4 +34,10 @@ const props = defineProps<{
     apiURL: string,
 }>()
 
+const settings = useSettingsStore();
+
+
+onBeforeMount(async () => {
+    await settings.callSettings();
+});
 </script>

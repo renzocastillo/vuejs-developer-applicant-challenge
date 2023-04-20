@@ -3,21 +3,21 @@
     <h2>Settings page</h2>
     <div class="numrows-setting">
       <label for="numrows">Numrows:</label>
-      <input type="number" v-model="numrows" min="1" max="5" id="numrows">
+      <input type="number" v-model="settings.numrows" min="1" max="5" id="numrows">
     </div>
     <div class="humandate-setting">
       <label for="humandate">Humandate:</label>
-      <input type="checkbox" v-model="humandate" id="humandate"/>
+      <input type="checkbox" v-model="settings.humandate" id="humandate"/>
 
     </div>
     <div class="emails-setting">
       <label>Emails:</label>
-      <div v-for="(email,index) in emails">
-        <input type="text" v-model="emails[index]" @change="updateEmailsSetting" :key="index">
+      <div v-for="(email,index) in settings.emails">
+        <input type="text" v-model="settings.emails[index]" @change="updateEmailsSetting" :key="index">
         <button @click="removeEmailField(index)" class="">- Remove</button>
       </div>
-      <div v-if="emails.length>=0">
-        <button @click="addEmailField" class="" :disabled="emails.length==5">+ Add</button>
+      <div v-if="settings.emails.length>=0">
+        <button @click="addEmailField" class="" :disabled="settings.emails.length==5">+ Add</button>
       </div>
       <p v-if="popupShow">{{ popupLabel }}</p>
     </div>
@@ -35,18 +35,8 @@ import {useSettingsStore} from "@/stores/settings";
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement
 }
-/*const settings = useSettingsStore();
-const humandate = ref(true);
-const emails = ref<string []>([]);
-const numrows = ref(0);
-const popupShow = ref(false);
-const popupLabel = ref('');*/
 
 const settings = useSettingsStore();
-await settings.callSettings();
-const humandate = shallowRef(settings.humandate);
-const emails = shallowRef<string []>(settings.emails);
-const numrows = shallowRef(settings.numrows);
 const popupShow = ref(false);
 const popupLabel = ref('');
 
@@ -59,18 +49,18 @@ const poppupShow = (label: string) => {
 }
 
 const addEmailField = () => {
-  if(emails.value.length < 5) {
-    emails.value.push('');
+  if(settings.emails.length < 5) {
+    settings.emails.push('');
   }
 };
 
 const removeEmailField = async (index: number) => {
-  emails.value.splice(index, 1);
+  settings.emails.splice(index, 1);
   updateEmailsSetting();
 };
 
 const updateEmailsSetting = async () => {
-    const updated = await settings.updateSetting('emails', emails.value);
+    const updated = await settings.updateSetting('emails', settings.emails);
     console.log(settings.updateSettingError);
     if (settings.updateSettingError.name != '') {
         poppupShow(settings.updateSettingError.name + ': ' + settings.updateSettingError.message);
@@ -84,7 +74,7 @@ const updateEmailsSetting = async () => {
     }
 }
 
-watch(humandate, async (current: boolean, prev: boolean) => {
+watch(()=> settings.humandate, async (current: boolean, prev: boolean) => {
     console.log(current);
     console.log(prev);
     if(current !=prev) {
@@ -97,7 +87,7 @@ watch(humandate, async (current: boolean, prev: boolean) => {
     }
 })
 
-watch(numrows, async (current: number, prev: number) => {
+watch(()=> settings.numrows, async (current: number, prev: number) => {
     if(current !=prev && prev!=0){
         console.log(current);
         console.log(prev);
@@ -115,17 +105,5 @@ if(settings.callSettingsError.name != ''){
     poppupShow(settings.callSettingsError.name+': '+settings.callSettingsError.message);
     settings.callSettingsError= { name: "", message: ""}
 }
-/*if (numrows.value == 0) {
-    await settings.callSettings();
-
-    if(settings.callSettingsError.name != ''){
-        poppupShow(settings.callSettingsError.name+': '+settings.callSettingsError.message);
-        settings.callSettingsError= { name: "", message: ""}
-    }else{
-        humandate.value = settings.humandate
-        emails.value = settings.emails;
-        numrows.value = settings.numrows;
-    }
-}*/
 
 </script>
