@@ -8,16 +8,25 @@ use WP_HTTP_Response;
 use WP_REST_Response;
 
 /**
+ * Class Settings API
  *
+ * This class gets all settings from our plugin, or updates them.
+ *
+ * @package Apis
  */
 class SettingsApi extends ApiRoutesController {
 	/**
+	 * The slug for your rest base API.
+	 *
 	 * @var string
+	 * @access protected
 	 */
 	protected $rest_base = '/settings';
 
 	/**
-	 * @param $request
+	 * Update a specific setting through its key and value, sanitize it, validate it and update its option value.
+	 *
+	 * @param array $request This contains the key value pair which is sent through a post method.
 	 *
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
@@ -44,12 +53,14 @@ class SettingsApi extends ApiRoutesController {
 	}
 
 	/**
-	 * @param $setting_key
-	 * @param $setting_value
+	 * Receives the setting key and value and validates according to setting key
+	 *
+	 * @param string $setting_key The settings key.
+	 * @param mixed  $setting_value The settings value.
 	 *
 	 * @return array
 	 */
-	public function validateSetting( $setting_key, $setting_value ): array {
+	public function validateSetting( string $setting_key, $setting_value ): array {
 		$success = true;
 		switch ( $setting_key ) {
 			case 'numrows':
@@ -90,6 +101,9 @@ class SettingsApi extends ApiRoutesController {
 	}
 
 	/**
+	 * Retrieves all settings with their respective values.
+	 *
+	 * @param array $data In this case it will be ignored.
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data( $data = array() ) {
@@ -100,14 +114,14 @@ class SettingsApi extends ApiRoutesController {
 	}
 
 	/**
-	 *
+	 * Validate if current role trying to access this API is an administrator.
 	 */
 	public function get_data_permissions() {
 		return current_user_can( 'administrator' );
 	}
 
 	/**
-	 *
+	 * Validate if current role trying to access this API is an administrator.
 	 */
 	public function update_data_permissions() {
 		return current_user_can( 'administrator' );

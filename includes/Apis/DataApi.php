@@ -7,16 +7,27 @@ use WP_Error;
 use WP_HTTP_Response;
 use WP_REST_Response;
 
+
 /**
+ * Class DataApi
  *
+ * This class retrieves the data from miusage.com remote API.
+ *
+ * @package Apis
  */
 class DataApi extends ApiRoutesController {
 	/**
+	 * The slug for your rest base API
+	 *
 	 * @var string
+	 * @access protected
 	 */
 	protected $rest_base = '/remote-data';
 
 	/**
+	 * Retrieve the data from miusage API only if transient doesn't exist (lives for 1 hour).
+	 *
+	 * @param  array $data This contains all the data that has been send as query strings.
 	 * @return WP_Error|WP_HTTP_Response|WP_REST_Response
 	 */
 	public function get_data( $data = array() ) {
@@ -40,11 +51,9 @@ class DataApi extends ApiRoutesController {
 	}
 
 	/**
-	 *
+	 * Validate if current role trying to access this API is an administrator.
 	 */
 	public function get_data_permissions() {
 		return current_user_can( 'administrator' );
-		//return rest_ensure_response( 'true' );
 	}
-
 }

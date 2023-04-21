@@ -1,12 +1,12 @@
-# renzo-castillo-vue
+# renzo-castillo
 
-This template should help get you started developing with Vue 3 in Vite.
+This Wordpress plugin is designed to accomplish the [Vue JS Developer Applicant Challenge for Awesome Motive](https://awesomemotive.com/vuejs-developer-applicant-challenge/) . 
 
-## Recommended IDE Setup
+## IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support for `.vue` Imports in TS
+### Type Support for `.vue` Imports in TS
 
 TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
@@ -17,7 +17,7 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
     2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-## Customize configuration
+### Customize configuration
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
@@ -32,6 +32,8 @@ npm install
 ```sh
 npm run dev
 ```
+
+*Note: Please keep in mind that if you test  the app with npm run dev, not all the variables that come from Wordpress will be available. 
 
 ### Type-Check, Compile and Minify for Production
 
@@ -50,3 +52,17 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+### PHP PSR4 Class autoloading
+
+````sh
+composer install
+````
+
+## Known issues
+
+* Navigation through tabs is giving the same `exact-active` class at all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string.
+* Pinia state variable that saves the emails list is being updated eventhough the update request to the settings api has been rejected. This shows non validated emails at the `AdminTable`--> `ListComponent`. Those emails dissapear if the page is reloaded since they didn't get saved.
+* Popup message when a setting is updated hasn't yet being added to translation strings.
+* Logo used at the app header is wp mail smtp logo and is being retrieved directly from an external URL.
+* Class autoloading is done through Composer autoload so `vendor/composer` is a dependency that requires to be installed as part of the plugin in order for the classes to load properly.
