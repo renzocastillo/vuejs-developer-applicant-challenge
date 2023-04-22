@@ -179,7 +179,7 @@ class Admin {
 		}
 	}
 	/**
-	 * Retrieves our favicon icon and includes only at our plugin pages
+	 * Retrieves our favicon icon and includes it only at our plugin admin pages
 	 *
 	 * @return void
 	 */
