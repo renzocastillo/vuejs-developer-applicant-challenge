@@ -64,5 +64,5 @@ composer install
 * Navigation through tabs is giving the same `exact-active` class at all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string.
 * Pinia state variable that saves the emails list is being updated eventhough the update request to the settings api has been rejected. This shows non validated emails at the `AdminTable`--> `ListComponent`. Those emails dissapear if the page is reloaded since they didn't get saved.
 * Popup message when a setting is updated hasn't yet being added to translation strings.
-* Logo used at the app header is wp mail smtp logo and is being retrieved directly from an external URL.
+* Missing favicon is giving a 404 error on page load
 * Class autoloading is done through Composer autoload so `vendor/composer` is a dependency that requires to be installed as part of the plugin in order for the classes to load properly.
