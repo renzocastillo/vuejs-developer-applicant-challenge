@@ -5,11 +5,16 @@ namespace Includes\Controllers;
 use Includes\Menus\Admin;
 
 /**
+ * Class ServicesController
+ * This class initializes all the services that our plugin requires on load.
  *
+ * @package Controllers
  */
 class ServicesController {
 
 	/**
+	 * Initiliazes all the methods required by our plugin
+	 *
 	 * @return void
 	 */
 	public static function init(): void {
@@ -18,6 +23,8 @@ class ServicesController {
 	}
 
 	/**
+	 * Initializes all the API routes classes that our plugin uses
+	 *
 	 * @return void
 	 */
 	protected static function init_routes(): void {

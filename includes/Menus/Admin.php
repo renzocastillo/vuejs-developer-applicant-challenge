@@ -3,11 +3,12 @@
 namespace Includes\Menus;
 
 /**
- *
+ * Class Admin
+ * This class generates all the wp admin dashboard pages
  */
 class Admin {
 	/**
-	 *
+	 * Initializes all the admin pages
 	 */
 	public function __construct() {
 		add_action( 'in_admin_header', array( $this, 'my_plugin_admin_header' ) );
@@ -16,6 +17,8 @@ class Admin {
 	}
 
 	/**
+	 * Creates all plugin admin menu pages and subpages
+	 *
 	 * @return void
 	 */
 	public function create_admin_menu() {
@@ -59,6 +62,8 @@ class Admin {
 	}
 
 	/**
+	 * Regiser JS scripts and CSS styles used by our admin menu
+	 *
 	 * @return void
 	 */
 	public function register_scripts_and_styles() {
@@ -67,6 +72,8 @@ class Admin {
 	}
 
 	/**
+	 * Register all admin CSS styles
+	 *
 	 * @return void
 	 */
 	public function load_styles() {
@@ -76,10 +83,17 @@ class Admin {
 	}
 
 	/**
+	 * Register all admin JS scripts
+	 *
 	 * @return void
 	 */
 	public function load_scripts() {
 		wp_register_script( 'vue-app', RECA_PLUGIN_URL . 'dist/assets/index.js', array(), RECA_VERSION, true );
+
+		/*
+		I tried to use this function to add the type=module for the vue-app script tag but appearently is not working:
+		wp_script_add_data( 'vue-app', 'type', 'module' );
+		*/
 		wp_enqueue_script( 'vue-app' );
 		$args = array(
 			'adminURL'           => admin_url( '/' ),
@@ -111,14 +125,15 @@ class Admin {
 			),
 		);
 		wp_localize_script( 'vue-app', 'wpData', $args );
-
 		add_filter( 'script_loader_tag', array( $this, 'add_type_attribute' ), 10, 3 );
 	}
 
 	/**
-	 * @param $tag
-	 * @param $handle
-	 * @param $src
+	 * Adds  the type="module" attribute to the vue-app js script tag
+	 *
+	 * @param mixed $tag The js script tag.
+	 * @param mixed $handle The script id.
+	 * @param mixed $src The source file url.
 	 *
 	 * @return mixed|string
 	 */
@@ -133,25 +148,28 @@ class Admin {
 	}
 
 	/**
+	 * Retrieves the basic html template on which Vue Application will be mounted
+	 *
 	 * @return void
 	 */
 	public function menu_page_template() {
-
-		echo '<noscript>Sorry, this page requires JavaScript to function properly. Please enable JavaScript in your browser and try again.</noscript>';
-
-		echo '<div class="wrap"><div id="app" v-cloak></div></div>';
+		$template_path = RECA_PLUGIN_PATH . 'includes/Templates/';
+		include_once $template_path . 'vue-app.php';
 
 	}
 
-
+	/**
+	 * Retrieves our admin header and includes only at our plugin pages
+	 *
+	 * @return void
+	 */
 	public function my_plugin_admin_header() {
 		$template_path  = RECA_PLUGIN_PATH . 'includes/Templates/';
 		$top_level_page = 'toplevel_page_renzo-castillo';
 		$base_slug      = 'renzo-castillo';
 		$screen         = get_current_screen();
 		if ( strpos( $screen->id, $base_slug ) === 0 || $screen->id === $top_level_page ) {
-			include_once( $template_path . 'header.php' );
+			include_once $template_path . 'header.php';
 		}
 	}
-
 }
