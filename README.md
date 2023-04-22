@@ -27,13 +27,15 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
+* Note: Node 18 is recommended, at least  Node 14 or above.
+
 ### Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
 ```
 
-*Note: Please keep in mind that if you test  the app with npm run dev, not all the variables that come from Wordpress will be available. 
+* Note: Please keep in mind that if you test  the app with npm run dev, not all the variables that come from Wordpress will be available. 
 
 ### Type-Check, Compile and Minify for Production
 
@@ -58,11 +60,11 @@ npm run lint
 ````sh
 composer install
 ````
+* Note: PHP 8.0 is recommended, at least PHP 7.4 or above
 
 ## Known issues
 
 * Navigation through tabs is giving the same `exact-active` class at all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string.
 * Pinia state variable that saves the emails list is being updated eventhough the update request to the settings api has been rejected. This shows non validated emails at the `AdminTable`--> `ListComponent`. Those emails dissapear if the page is reloaded since they didn't get saved.
 * Popup message when a setting is updated hasn't yet being added to translation strings.
-* Missing favicon is giving a 404 error on page load
 * Class autoloading is done through Composer autoload so `vendor/composer` is a dependency that requires to be installed as part of the plugin in order for the classes to load properly.

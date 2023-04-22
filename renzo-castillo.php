@@ -1,4 +1,4 @@
-<?php /** @noinspection SpellCheckingInspection */
+<?php
 /**
  * Plugin Name:     Renzo Castillo
  * Plugin URI:      PLUGIN SITE HERE
@@ -8,6 +8,7 @@
  * Text Domain:     renzo-castillo
  * Domain Path:     /languages
  * Version:         0.1.0
+ * Requires PHP: 7.4
  *
  * @package         Renzo_Castillo
  */
