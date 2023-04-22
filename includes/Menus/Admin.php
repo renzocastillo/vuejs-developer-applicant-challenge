@@ -11,9 +11,10 @@ class Admin {
 	 * Initializes all the admin pages
 	 */
 	public function __construct() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts_and_styles' ) );
+		add_action( 'admin_head', array( $this, 'add_admin_favicon' ) );
 		add_action( 'in_admin_header', array( $this, 'my_plugin_admin_header' ) );
 		add_action( 'admin_menu', array( $this, 'create_admin_menu' ), 11 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts_and_styles' ) );
 	}
 
 	/**
@@ -170,6 +171,19 @@ class Admin {
 		$screen         = get_current_screen();
 		if ( strpos( $screen->id, $base_slug ) === 0 || $screen->id === $top_level_page ) {
 			include_once $template_path . 'header.php';
+		}
+	}
+	/**
+	 * Retrieves our favicon icon and includes only at our plugin pages
+	 *
+	 * @return void
+	 */
+	public function add_admin_favicon() {
+		$top_level_page = 'toplevel_page_renzo-castillo';
+		$base_slug      = 'renzo-castillo';
+		$screen         = get_current_screen();
+		if ( strpos( $screen->id, $base_slug ) === 0 || $screen->id === $top_level_page ) {
+			echo '<link rel="shortcut icon" href="' . esc_url( RECA_PLUGIN_URL . 'assets/images/favicon.ico' ) . '" />';
 		}
 	}
 }
