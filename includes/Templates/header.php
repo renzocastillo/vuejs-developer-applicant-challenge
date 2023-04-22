@@ -6,7 +6,7 @@
 
 ?>
 <div id="reca-header">
-	<img class="reca-header-logo" src="<?php echo esc_url(RECA_PLUGIN_URL . 'assets/images/logo.png') ; ?>" alt="Renzo Castillo">
+	<img class="reca-header-logo" src="<?php echo esc_url( RECA_PLUGIN_URL . 'assets/images/logo.png' ); ?>" alt="Renzo Castillo">
 	<h2>RENZO CASTILLO VUEJS DEVELOPER APPLICANT CHALLENGE</h2>
 </div>
 
