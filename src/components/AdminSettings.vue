@@ -28,11 +28,19 @@
 </style>
 
 <script setup lang="ts">
+/**
+ * Component for displaying and updating user settings.
+ */
 import {onMounted, reactive, ref, watch,shallowRef} from "vue";
 import {useSettingsStore} from "@/stores/settings";
 import {translationStrings} from "../router";
 
-
+/**
+ * Interface for HTML input event.
+ *
+ * @interface
+ * @extends Event
+ */
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement
 }
@@ -41,6 +49,12 @@ const settings = useSettingsStore();
 const popupShow = ref(false);
 const popupLabel = ref('');
 
+/**
+ * Displays a popup message.
+ *
+ * @function
+ * @param {string} label - The message to display.
+ */
 const poppupShow = (label: string) => {
   popupLabel.value = label;
   popupShow.value = true;
@@ -49,17 +63,35 @@ const poppupShow = (label: string) => {
   }, 3000);
 }
 
+/**
+ * Adds an email input field.
+ *
+ * @function
+ */
 const addEmailField = () => {
   if(settings.emails.length < 5) {
     settings.emails.push('');
   }
 };
 
+/**
+ * Removes an email input field.
+ *
+ * @function
+ * @async
+ * @param {number} index - The index of the email field to remove.
+ */
 const removeEmailField = async (index: number) => {
   settings.emails.splice(index, 1);
   updateEmailsSetting();
 };
 
+/**
+ * Updates the email setting.
+ *
+ * @function
+ * @async
+ */
 const updateEmailsSetting = async () => {
     const updated = await settings.updateSetting('emails', settings.emails);
     console.log(settings.updateSettingError);
@@ -75,6 +107,9 @@ const updateEmailsSetting = async () => {
     }
 }
 
+/**
+ * Watches the humandate setting for changes.
+ */
 watch(()=> settings.humandate, async (current: boolean, prev: boolean) => {
     console.log(current);
     console.log(prev);
@@ -88,6 +123,9 @@ watch(()=> settings.humandate, async (current: boolean, prev: boolean) => {
     }
 })
 
+/**
+ * Watches the numrows setting for changes.
+ */
 watch(()=> settings.numrows, async (current: number, prev: number) => {
     if(current !=prev && prev!=0){
         console.log(current);
@@ -102,6 +140,9 @@ watch(()=> settings.numrows, async (current: number, prev: number) => {
     }
 })
 
+/**
+ * Displays a popup message if there is an error calling the settings API.
+ */
 if(settings.callSettingsError.name != ''){
     poppupShow(settings.callSettingsError.name+': '+settings.callSettingsError.message);
     settings.callSettingsError= { name: "", message: ""}

@@ -9,12 +9,24 @@
 <style>
 </style>
 <script setup lang="ts">
+/**
+ * Component for displaying a bar chart and refreshing its data.
+ */
 import BarChartComponent from "@/components/BarChartComponent.vue";
 import {useDataStore} from "@/stores/data";
 import {translationStrings} from "@/router";
+import {onBeforeMount} from "vue";
 
-const data=useDataStore();
-if(Object.keys(data.graph).length == 0){
+/**
+ * Retrieves Pinia data store.
+ */
+const data = useDataStore();
+
+/**
+ * The on before mount function which calls the data to initiliaze the table.
+ *
+ * */
+onBeforeMount(async () => {
     await data.callData();
-}
+});
 </script>

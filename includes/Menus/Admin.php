@@ -118,9 +118,12 @@ class Admin {
 			'nonce'              => wp_create_nonce( 'wp_rest' ),
 			'translationStrings' => array(
 				'table_page'    => __( 'Table page', 'renzo-castillo' ),
+				'table'         => __( 'Table', 'renzo-castillo' ),
 				'graph_page'    => __( 'Graph page', 'renzo-castillo' ),
+				'graph'         => __( 'Graph', 'renzo-castillo' ),
 				'graph_values'  => __( 'Values', 'renzo-castillo' ),
 				'settings_page' => __( 'Settings page', 'renzo-castillo' ),
+				'settings'      => __( 'Settings', 'renzo-castillo' ),
 				'numrows'       => __( 'Number of rows', 'renzo-castillo' ),
 				'humandate'     => __( 'Human Date', 'renzo-castillo' ),
 				'emails'        => __( 'Emails', 'renzo-castillo' ),
