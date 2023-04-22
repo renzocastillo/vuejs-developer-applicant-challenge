@@ -62,6 +62,10 @@ composer install
 ````
 * Note: PHP 8.0 is recommended, at least PHP 7.4 or above
 
+### Wordpress translations
+
+* This plugin has an `es_PE` translation. Consider adding `Español de Perú` to your Wordpress site language to test it. 
+
 ## Known issues
 
 * Navigation through tabs is giving the same `exact-active` class at all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string.
