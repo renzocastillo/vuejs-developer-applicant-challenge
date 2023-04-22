@@ -23,12 +23,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once 'vendor/autoload.php';
 
 /**
+ * Class RECA_RenzoCastillo
  *
+ * @since 1.0.0
  */
 final class RECA_RenzoCastillo {
 
 	/**
+	 * RECA_RenzoCastillo constructor.
 	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->constants();
@@ -38,6 +42,9 @@ final class RECA_RenzoCastillo {
 	}
 
 	/**
+	 * Set plugin constants.
+	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function constants() {
@@ -52,6 +59,9 @@ final class RECA_RenzoCastillo {
 	}
 
 	/**
+	 * Perform plugin activation tasks.
+	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function activate() {
@@ -70,6 +80,9 @@ final class RECA_RenzoCastillo {
 	}
 
 	/**
+	 * Perform plugin deactivation tasks.
+	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function deactivate() {
@@ -77,6 +90,9 @@ final class RECA_RenzoCastillo {
 	}
 
 	/**
+	 * Initialize the plugin.
+	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function initialize() {
