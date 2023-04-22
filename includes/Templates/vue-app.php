@@ -9,5 +9,5 @@
 	again.
 </noscript>
 <div class="wrap">
-	<div id="app" v-cloak></div>
+	<div id="renzo-castillo-app" v-cloak></div>
 </div>

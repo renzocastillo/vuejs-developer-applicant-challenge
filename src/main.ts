@@ -56,6 +56,6 @@ app.provide('axios', app.config.globalProperties.axios)
  * @function
  * @param {string} selector - The CSS selector for the element to mount the application to.
  */
-app.mount('#app')
+app.mount('#renzo-castillo-app')
 
 
