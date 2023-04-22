@@ -68,8 +68,13 @@ class Admin {
 	 * @return void
 	 */
 	public function register_scripts_and_styles() {
-		$this->load_scripts();
-		$this->load_styles();
+		$top_level_page = 'toplevel_page_renzo-castillo';
+		$base_slug      = 'renzo-castillo';
+		$screen         = get_current_screen();
+		if ( strpos( $screen->id, $base_slug ) === 0 || $screen->id === $top_level_page ) {
+			$this->load_scripts();
+			$this->load_styles();
+		}
 	}
 
 	/**
