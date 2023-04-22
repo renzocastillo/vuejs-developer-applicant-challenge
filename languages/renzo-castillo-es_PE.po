@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2023-04-20T18:36:21+00:00\n"
-"PO-Revision-Date: 2023-04-20 18:44+0000\n"
+"PO-Revision-Date: 2023-04-22 22:00+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: renzo-castillo\n"
 "Language: es_PE\n"
@@ -54,7 +54,7 @@ msgstr "Página de la tabla"
 
 #: includes/Menus/Admin.php:101
 msgid "Graph page"
-msgstr "Página de la Gráfica"
+msgstr "Página de la gráfica"
 
 #: includes/Menus/Admin.php:102
 msgid "Values"
