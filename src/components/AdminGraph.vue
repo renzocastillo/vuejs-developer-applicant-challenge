@@ -1,12 +1,17 @@
 <template>
-  <div class="settings">
-    <h2>{{ translationStrings.graph_page }}</h2>
-    <a class="btn btn-info float-end" @click="data.callData(true)">{{ translationStrings.refresh }}</a>
-    <BarChartComponent/>
-  </div>
+    <div class="settings">
+        <h2>{{ translationStrings.graph_page }}</h2>
+        <a class="btn btn-info float-end" @click="data.callData(true)">{{ translationStrings.refresh }}</a>
+        <div class="graph-container">
+            <BarChartComponent/>
+        </div>
+    </div>
 </template>
 
 <style>
+.graph-container{
+    max-height: 60vh;
+}
 </style>
 <script setup lang="ts">
 /**
