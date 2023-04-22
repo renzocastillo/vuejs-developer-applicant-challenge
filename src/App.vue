@@ -20,7 +20,6 @@
 import {onBeforeMount, onMounted, type PropType} from "vue";
 import {RouterLink, RouterView} from 'vue-router'
 import {adminPages} from "@/router";
-import Header from './components/Header.vue'
 import {useSettingsStore} from "@/stores/settings";
 
 interface AdminPages {
