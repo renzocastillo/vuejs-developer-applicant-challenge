@@ -27,11 +27,7 @@ import {onBeforeMount} from "vue";
  */
 const data = useDataStore();
 
-/**
- * The on before mount function which calls the data to initiliaze the table.
- *
- * */
-onBeforeMount(async () => {
+if(Object.keys(data.graph).length == 0){
     await data.callData();
-});
+}
 </script>

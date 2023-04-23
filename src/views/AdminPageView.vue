@@ -7,7 +7,7 @@
             <AdminGraph v-if="page=== adminPages.graph"/>
         </suspense>
         <suspense>
-            <AdminSettings v-if="page=== adminPages.settings"/>
+            <AdminSettings v-if="page=== adminPages.settings" ref="adminSettingsRef"/>
         </suspense>
     </main>
 </template>
@@ -25,6 +25,7 @@ import AdminGraph from "@/components/AdminGraph.vue";
 import {useSettingsStore} from "@/stores/settings";
 import {useDataStore} from "@/stores/data";
 import {adminPages} from "@/router";
+import {onBeforeMount,ref,unref} from "vue";
 
 /**
  * Represents an object with admin page names as keys and their corresponding string values as values.
@@ -44,5 +45,26 @@ const props = defineProps<{
     adminPages: AdminPages,
 }>();
 
+/**
+ * The settings for the Pinia settings store
+ *
+ * */
+const settings = useSettingsStore();
+
+// Create a ref for the child component
+const adminSettingsRef = ref< typeof AdminSettings|null>(null)
+
+/**
+ * The on before mount function which calls the settings to initiliaze the app.
+ * */
+onBeforeMount(async () => {
+    await settings.callSettings();
+    const adminSettings = adminSettingsRef.value;
+    if(adminSettings ){
+        adminSettings.numrows = unref(settings.numrows);
+        adminSettings.humandate = unref(settings.humandate);
+        adminSettings.emails = unref(settings.emails);
+    }
+});
 
 </script>

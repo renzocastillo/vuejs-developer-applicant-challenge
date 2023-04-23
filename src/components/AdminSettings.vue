@@ -3,21 +3,21 @@
     <h2>{{ translationStrings.settings_page }}</h2>
     <div class="numrows-setting">
       <label for="numrows">{{ translationStrings.numrows }}:</label>
-      <input type="number" v-model="settings.numrows" min="1" max="5" id="numrows">
+      <input type="number" v-model="numrows" min="1" max="5" id="numrows">
     </div>
     <div class="humandate-setting">
       <label for="humandate">{{ translationStrings.humandate }}:</label>
-      <input type="checkbox" v-model="settings.humandate" id="humandate"/>
+      <input type="checkbox" v-model="humandate" id="humandate"/>
 
     </div>
     <div class="emails-setting">
       <label>{{ translationStrings.emails }}:</label>
-      <div v-for="(email,index) in settings.emails">
-        <input type="text" v-model="settings.emails[index]" @change="updateEmailsSetting" :key="index">
+      <div v-for="(email,index) in emails">
+        <input type="text" v-model="emails[index]" @change="updateEmailsSetting" :key="index">
         <button @click="removeEmailField(index)" class="">- {{ translationStrings.remove }}</button>
       </div>
-      <div v-if="settings.emails.length>=0">
-        <button @click="addEmailField" class="" :disabled="settings.emails.length==5">+ {{ translationStrings.add }}</button>
+      <div v-if="emails.length>=0">
+        <button @click="addEmailField" class="" :disabled="emails.length==5">+ {{ translationStrings.add }}</button>
       </div>
       <p v-if="popupShow">{{ popupLabel }}</p>
     </div>
@@ -31,7 +31,7 @@
 /**
  * Component for displaying and updating user settings.
  */
-import {onMounted, reactive, ref, watch,shallowRef} from "vue";
+import {onMounted, reactive, ref, unref,watch, shallowRef, onBeforeMount} from "vue";
 import {useSettingsStore} from "@/stores/settings";
 import {translationStrings} from "../router";
 
@@ -48,6 +48,9 @@ interface HTMLInputEvent extends Event {
 const settings = useSettingsStore();
 const popupShow = ref(false);
 const popupLabel = ref('');
+const numrows = ref(unref(settings.numrows));
+const humandate = ref(unref(settings.humandate));
+const emails = ref(unref(settings.emails)) ;
 
 /**
  * Displays a popup message.
@@ -69,8 +72,8 @@ const poppupShow = (label: string) => {
  * @function
  */
 const addEmailField = () => {
-  if(settings.emails.length < 5) {
-    settings.emails.push('');
+  if(emails.value.length < 5) {
+    emails.value.push('');
   }
 };
 
@@ -82,7 +85,7 @@ const addEmailField = () => {
  * @param {number} index - The index of the email field to remove.
  */
 const removeEmailField = async (index: number) => {
-  settings.emails.splice(index, 1);
+  emails.value.splice(index, 1);
   updateEmailsSetting();
 };
 
@@ -93,8 +96,7 @@ const removeEmailField = async (index: number) => {
  * @async
  */
 const updateEmailsSetting = async () => {
-    const updated = await settings.updateSetting('emails', settings.emails);
-    console.log(settings.updateSettingError);
+    const updated = await settings.updateSetting('emails', emails.value);
     if (settings.updateSettingError.name != '') {
         poppupShow(settings.updateSettingError.name + ': ' + settings.updateSettingError.message);
         settings.updateSettingError = {name: "", message: ""}
@@ -110,9 +112,7 @@ const updateEmailsSetting = async () => {
 /**
  * Watches the humandate setting for changes.
  */
-watch(()=> settings.humandate, async (current: boolean, prev: boolean) => {
-    console.log(current);
-    console.log(prev);
+watch(humandate, async (current: boolean, prev: boolean) => {
     if(current !=prev) {
         const updated = await settings.updateSetting('humandate', current);
         if (updated) {
@@ -126,10 +126,8 @@ watch(()=> settings.humandate, async (current: boolean, prev: boolean) => {
 /**
  * Watches the numrows setting for changes.
  */
-watch(()=> settings.numrows, async (current: number, prev: number) => {
+watch(numrows, async (current: number, prev: number) => {
     if(current !=prev && prev!=0){
-        console.log(current);
-        console.log(prev);
         const updated = await settings.updateSetting('numrows', current);
         if(updated){
             poppupShow('Numrows was updated');
@@ -148,4 +146,9 @@ if(settings.callSettingsError.name != ''){
     settings.callSettingsError= { name: "", message: ""}
 }
 
+defineExpose({
+    numrows,
+    humandate,
+    emails,
+})
 </script>

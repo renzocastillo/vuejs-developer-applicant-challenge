@@ -49,16 +49,4 @@ const props = defineProps<{
     apiURL: string,
 }>()
 
-/**
- * The settings for the Pini settings store
- *
- * */
-const settings = useSettingsStore();
-
-/**
- * The on before mount function which calls the settings to initiliaze the app.
- * */
-onBeforeMount(async () => {
-    await settings.callSettings();
-});
 </script>
