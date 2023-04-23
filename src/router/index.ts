@@ -52,6 +52,8 @@ interface WPData{
         remove: string,
         add: string,
         refresh: string,
+        updated: string,
+        notUpdated: string,
     }
 }
 declare global {
@@ -84,6 +86,8 @@ const wpData= window.wpData ||
             "remove": 'text',
             "add": 'text',
             "refresh": 'text',
+            "updated": 'text',
+            "notUpdated": 'text',
         }
     };
 const {adminURL,adminPath,adminPages,ajaxURL,apiURL,apiName,apiSettings, apiData, basePath,nonce,translationStrings} = wpData;

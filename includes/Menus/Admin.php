@@ -131,6 +131,10 @@ class Admin {
 				'remove'        => __( 'Remove', 'renzo-castillo' ),
 				'add'           => __( 'Add', 'renzo-castillo' ),
 				'refresh'       => __( 'Refresh', 'renzo-castillo' ),
+				// translators: %s is the settings name.
+				'updated'       => __( 'Setting %s was updated', 'renzo-castillo' ),
+				// translators: %s is the settings name.
+				'notUpdated'    => __( 'Setting %s was not updated', 'renzo-castillo' ),
 			),
 		);
 		wp_localize_script( 'vue-app', 'wpData', $args );

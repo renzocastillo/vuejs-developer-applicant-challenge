@@ -102,9 +102,9 @@ const updateEmailsSetting = async () => {
         settings.updateSettingError = {name: "", message: ""}
     } else {
         if (updated) {
-            poppupShow('Emails were updated');
+            poppupShow(translationStrings.updated.replace('%s', translationStrings.emails));
         } else {
-            poppupShow('Emails were not updated');
+            poppupShow(translationStrings.notUpdated.replace('%s', translationStrings.emails));
         }
     }
 }
@@ -116,9 +116,9 @@ watch(humandate, async (current: boolean, prev: boolean) => {
     if(current !=prev) {
         const updated = await settings.updateSetting('humandate', current);
         if (updated) {
-            poppupShow('Humandate was updated');
+            poppupShow(translationStrings.updated.replace('%s', translationStrings.humandate));
         } else {
-            poppupShow('Humandate was not updated');
+            poppupShow(translationStrings.notUpdated.replace('%s', translationStrings.humandate));
         }
     }
 })
@@ -130,10 +130,10 @@ watch(numrows, async (current: number, prev: number) => {
     if(current !=prev && prev!=0){
         const updated = await settings.updateSetting('numrows', current);
         if(updated){
-            poppupShow('Numrows was updated');
+            poppupShow(translationStrings.updated.replace('%s', translationStrings.numrows));
 
         }else{
-            poppupShow('Numrows was not updated');
+            poppupShow(translationStrings.notUpdated.replace('%s', translationStrings.numrows));
         }
     }
 })
