@@ -48,9 +48,9 @@ interface HTMLInputEvent extends Event {
 const settings = useSettingsStore();
 const popupShow = ref(false);
 const popupLabel = ref('');
-const numrows = ref(unref(settings.numrows));
-const humandate = ref(unref(settings.humandate));
-const emails = ref(unref(settings.emails)) ;
+const numrows = ref(settings.numrows);
+const humandate = ref(settings.humandate);
+const emails = ref<string []>([...settings.emails]);
 
 /**
  * Displays a popup message.

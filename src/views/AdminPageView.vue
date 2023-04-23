@@ -61,9 +61,9 @@ onBeforeMount(async () => {
     await settings.callSettings();
     const adminSettings = adminSettingsRef.value;
     if(adminSettings ){
-        adminSettings.numrows = unref(settings.numrows);
-        adminSettings.humandate = unref(settings.humandate);
-        adminSettings.emails = unref(settings.emails);
+        adminSettings.numrows = settings.numrows;
+        adminSettings.humandate = settings.humandate;
+        adminSettings.emails = [...settings.emails];
     }
 });
 
