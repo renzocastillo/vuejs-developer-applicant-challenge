@@ -27,10 +27,12 @@
       padding: 20px 0 18px 0;
       text-decoration: none;
 
-      &:active{
-        border-bottom: 2px solid #e27730;
+      li{
+        list-style-type: none;
+        &.active{
+          border-bottom: 2px solid #e27730;
+        }
       }
-
     }
 
   }

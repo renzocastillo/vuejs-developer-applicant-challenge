@@ -2,14 +2,20 @@
     <header>
         <div class="wrapper">
             <div v-if="adminPages!= undefined" class="tabs-container">
-                <RouterLink :to="{ name: 'admin', query: { page: adminPages.table }}">{{ translationStrings.table }}</RouterLink>
-                <RouterLink :to="{ name: 'admin', query: { page: adminPages.graph }}">{{ translationStrings.graph }}</RouterLink>
-                <RouterLink :to="{ name: 'admin', query: { page: adminPages.settings }}">{{ translationStrings.settings }}</RouterLink>
+                <RouterLink :to="{ name: 'admin', query: { page: adminPages.table }}">
+                    <li :class="{ active: $route.query.page === adminPages.table }">{{translationStrings.table}}</li>
+                </RouterLink>
+                <RouterLink :to="{ name: 'admin', query: { page: adminPages.graph }}">
+                    <li :class="{ active: $route.query.page === adminPages.graph }">{{translationStrings.graph}}</li>
+                </RouterLink>
+                <RouterLink :to="{ name: 'admin', query: { page: adminPages.settings }}">
+                    <li :class="{ active: $route.query.page === adminPages.settings }">{{translationStrings.settings}}</li>
+                </RouterLink>
             </div>
         </div>
     </header>
 
-    <RouterView :adminPages="adminPages"/>
+    <RouterView/>
 
 </template>
 

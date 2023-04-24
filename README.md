@@ -68,4 +68,4 @@ composer install
 
 ## Known issues
 
-* Navigation through tabs is giving the same `exact-active` class to all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string. However, the active class it is showing up on click event.
+* No issues detected at the moment.
