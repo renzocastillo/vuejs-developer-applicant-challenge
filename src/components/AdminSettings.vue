@@ -51,7 +51,8 @@ const popupLabel = ref('');
 const numrows = ref(settings.numrows);
 const humandate = ref(settings.humandate);
 const emails = ref<string []>([...settings.emails]);
-
+const ignoreNumRowsWatch = ref(false);
+const ignoreHumanDateWatch = ref(false);
 /**
  * Displays a popup message.
  *
@@ -113,6 +114,10 @@ const updateEmailsSetting = async () => {
  * Watches the humandate setting for changes.
  */
 watch(humandate, async (current: boolean, prev: boolean) => {
+    if(ignoreHumanDateWatch.value){
+        ignoreHumanDateWatch.value=false;
+        return;
+    }
     if(current !=prev) {
         const updated = await settings.updateSetting('humandate', current);
         if (updated) {
@@ -127,6 +132,10 @@ watch(humandate, async (current: boolean, prev: boolean) => {
  * Watches the numrows setting for changes.
  */
 watch(numrows, async (current: number, prev: number) => {
+    if(ignoreNumRowsWatch.value){
+        ignoreNumRowsWatch.value=false;
+        return;
+    }
     if(current !=prev && prev!=0){
         const updated = await settings.updateSetting('numrows', current);
         if(updated){
@@ -150,5 +159,7 @@ defineExpose({
     numrows,
     humandate,
     emails,
+    ignoreHumanDateWatch,
+    ignoreNumRowsWatch,
 })
 </script>

@@ -61,7 +61,9 @@ onBeforeMount(async () => {
     await settings.callSettings();
     const adminSettings = adminSettingsRef.value;
     if(adminSettings ){
+        adminSettings.ignoreNumRowsWatch = true;
         adminSettings.numrows = settings.numrows;
+        adminSettings.ignoreHumanDateWatch = true;
         adminSettings.humandate = settings.humandate;
         adminSettings.emails = [...settings.emails];
     }
