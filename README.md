@@ -55,7 +55,7 @@ npm run test:unit
 npm run lint
 ```
 
-### PHP PSR4 Class autoloading
+### PHP Project Dependencies
 
 ````sh
 composer install
@@ -68,5 +68,4 @@ composer install
 
 ## Known issues
 
-* Navigation through tabs is giving the same `exact-active` class at all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string.
-* Class autoloading is done through Composer autoload so `vendor/composer` is a dependency that requires to be installed as part of the plugin in order for the classes to load properly.
+* Navigation through tabs is giving the same `exact-active` class to all Vue Router `router-link` elements and not highlithing only one and matching the current browser query string. However, the active class it is showing up on click event.
