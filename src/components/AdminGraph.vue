@@ -1,7 +1,7 @@
 <template>
     <div class="settings">
         <h2>{{ translationStrings.graph_page }}</h2>
-        <a class="btn btn-info float-end" @click="data.callData(true)">{{ translationStrings.refresh }}</a>
+        <a class="btn btn-info float-end" @click="callData(true)" :disabled="btnDisabled">{{ translationStrings.refresh }}</a>
         <div class="graph-container">
             <BarChartComponent/>
         </div>
@@ -20,14 +20,22 @@
 import BarChartComponent from "@/components/BarChartComponent.vue";
 import {useDataStore} from "@/stores/data";
 import {translationStrings} from "@/router";
-import {onBeforeMount} from "vue";
+import {onBeforeMount,ref} from "vue";
 
 /**
  * Retrieves Pinia data store.
  */
 const data = useDataStore();
-
-if(Object.keys(data.graph).length == 0){
-    await data.callData();
+const btnDisabled = ref(false);
+const callData = async(update:boolean = false)=>{
+    if(!btnDisabled.value){
+        btnDisabled.value=true;
+        await data.callData(update);
+        btnDisabled.value=false;
+    }
 }
+if(Object.keys(data.graph).length == 0){
+    callData();
+}
+
 </script>
