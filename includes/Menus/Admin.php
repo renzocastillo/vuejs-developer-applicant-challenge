@@ -83,8 +83,8 @@ class Admin {
 	 * @return void
 	 */
 	public function load_styles() {
-		wp_register_style( 'vue-app', RECA_PLUGIN_URL . 'dist/assets/index.css', array(), true, 'all' );
-		wp_enqueue_style( 'vue-app' );
+		wp_register_style( 'reca-vue-app', RECA_PLUGIN_URL . 'dist/assets/index.css', array(), true, 'all' );
+		wp_enqueue_style( 'reca-vue-app' );
 
 	}
 
@@ -94,13 +94,13 @@ class Admin {
 	 * @return void
 	 */
 	public function load_scripts() {
-		wp_register_script( 'vue-app', RECA_PLUGIN_URL . 'dist/assets/index.js', array(), RECA_VERSION, true );
+		wp_register_script( 'reca-vue-app', RECA_PLUGIN_URL . 'dist/assets/index.js', array(), RECA_VERSION, true );
 
 		/*
 		I tried to use this function to add the type=module for the vue-app script tag but appearently is not working:
-		wp_script_add_data( 'vue-app', 'type', 'module' );
+		wp_script_add_data( 'reca-vue-app', 'type', 'module' );
 		*/
-		wp_enqueue_script( 'vue-app' );
+		wp_enqueue_script( 'reca-vue-app' );
 		$args = array(
 			'adminURL'           => admin_url( '/' ),
 			'adminPath'          => '/admin.php',
@@ -137,7 +137,7 @@ class Admin {
 				'notUpdated'    => __( 'Setting %s was not updated', 'renzo-castillo' ),
 			),
 		);
-		wp_localize_script( 'vue-app', 'wpData', $args );
+		wp_localize_script( 'reca-vue-app', 'wpData', $args );
 		add_filter( 'script_loader_tag', array( $this, 'add_type_attribute' ), 10, 3 );
 	}
 
@@ -152,7 +152,7 @@ class Admin {
 	 */
 	public function add_type_attribute( $tag, $handle, $src ) {
 		// if not your script, do nothing and return original $tag.
-		if ( 'vue-app' !== $handle ) {
+		if ( 'reca-vue-app' !== $handle ) {
 			return $tag;
 		}
 
