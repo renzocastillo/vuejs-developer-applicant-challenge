@@ -1,8 +1,8 @@
 <?php
 
-namespace Includes\Apis;
+namespace RECA\Apis;
 
-use Includes\Controllers\ApiRoutesController;
+use RECA\Controllers\ApiRoutesController;
 use WP_Error;
 use WP_HTTP_Response;
 use WP_REST_Response;

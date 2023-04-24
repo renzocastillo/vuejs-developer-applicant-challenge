@@ -1,6 +1,6 @@
 <?php
 
-namespace Includes\Controllers;
+namespace RECA\Controllers;
 
 use WP_REST_Controller;
 use WP_REST_Server;

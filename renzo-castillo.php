@@ -14,13 +14,14 @@
  */
 
 // Your code starts here.
-use Includes\Controllers\ServicesController;
+use RECA\Controllers\ServicesController;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
-require_once 'vendor/autoload.php';
+// Include the autoloader.
+require_once __DIR__ . '/loader.php';
 
 /**
  * Class RECA_RenzoCastillo

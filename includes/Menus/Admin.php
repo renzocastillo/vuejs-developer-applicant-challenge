@@ -1,6 +1,6 @@
 <?php
 
-namespace Includes\Menus;
+namespace RECA\Menus;
 
 /**
  * Class Admin

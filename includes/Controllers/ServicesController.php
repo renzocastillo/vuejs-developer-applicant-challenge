@@ -1,8 +1,8 @@
 <?php
 
-namespace Includes\Controllers;
+namespace RECA\Controllers;
 
-use Includes\Menus\Admin;
+use RECA\Menus\Admin;
 
 /**
  * Class ServicesController
@@ -30,7 +30,7 @@ class ServicesController {
 	protected static function init_routes(): void {
 		$api_path         = '/includes/Apis/';
 		$api_files        = glob( RECA_PLUGIN_PATH . $api_path . '*.php' );
-		$routes_namespace = 'Includes\Apis\\';
+		$routes_namespace = 'RECA\Apis\\';
 		foreach ( $api_files as $api_file ) {
 			$api_class = $routes_namespace . basename( $api_file, '.php' );
 			new $api_class();
