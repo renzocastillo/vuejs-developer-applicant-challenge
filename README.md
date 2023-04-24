@@ -68,4 +68,4 @@ composer install
 
 ## Known issues
 
-* No issues detected at the moment.
+* There's not a validation to check if `test_project_option` already exists. The right approach would be to validate its existance and create it with a proper plugin prefix. This hasn't been done yet because I wanted to already deliver the project in order to be reviewed. Thank you for your understanding. 
